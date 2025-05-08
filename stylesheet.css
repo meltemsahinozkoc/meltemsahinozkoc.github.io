@@ -70,7 +70,7 @@ a {
 
 a:focus,
 a:hover {
-  color: #f09228;
+  color: #f09222;
   text-decoration: none;
 }
 
@@ -131,7 +131,7 @@ h2 {
 }
 
 span.highlight {
-  background-color: #ffffd0;
+  background-color: gray;
 }
 
 .colored-box {
