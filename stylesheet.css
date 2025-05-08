@@ -131,7 +131,7 @@ h2 {
 }
 
 span.highlight {
-  background-color: gray;
+  background-color: #ffffd0;
 }
 
 .colored-box {
@@ -158,6 +158,27 @@ span.highlight {
 
 [data-theme="dark"] span.highlight {
   background-color: #2d2d2d;
+}
+
+/* Project box styles */
+[data-theme="dark"] tr[bgcolor="#f5f5f5"] {
+  background-color: #2d2d2d !important;
+}
+
+[data-theme="dark"] tr[bgcolor="#f5f5f5"] td {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] tr[bgcolor="#f5f5f5"] em {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] tr[bgcolor="#f5f5f5"] span {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] tr[bgcolor="#f5f5f5"] p {
+  color: #ffffff !important;
 }
 
 /* Theme toggle button styles */
