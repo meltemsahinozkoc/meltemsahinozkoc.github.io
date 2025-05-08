@@ -140,3 +140,60 @@ span.highlight {
     display: inline-block;
     border-radius: 10px;
 }
+
+/* Dark theme styles */
+[data-theme="dark"] {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+[data-theme="dark"] a {
+  color: #4a9eff;
+}
+
+[data-theme="dark"] a:focus,
+[data-theme="dark"] a:hover {
+  color: #ffb74a;
+}
+
+[data-theme="dark"] span.highlight {
+  background-color: #2d2d2d;
+}
+
+/* Theme toggle button styles */
+.theme-toggle {
+  background: none;
+  position: fixed;
+  margin: 0;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  background-color: none;
+  box-shadow: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: background-color 0.3s ease;
+  color: inherit;
+}
+
+[data-theme="dark"] .theme-toggle {
+  background-color: none;
+  color: white;
+}
+
+.theme-toggle:hover {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background-color: transparent;
+}
+
+.theme-toggle:hover i.fa-moon {
+  color: #4a9eff;
+  transition: color 0.5s ease;
+}
+
