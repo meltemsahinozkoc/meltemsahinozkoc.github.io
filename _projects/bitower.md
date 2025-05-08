@@ -13,7 +13,7 @@ categories: project
 author: "Meltem Sahin Ozkoc"
 authors: "<strong>Meltem Sahin Ozkoc</strong>"
 code: https://github.com/meltemsahinozkoc
-website: "https://meltemsahinozkoc.github.io/bitower"
+website: "https://meltemsahinozkoc.github.io/bitower""
 
 gallery:
   - "assets/images/bi-t-ower.jpg"
@@ -23,3 +23,4 @@ BI-T-OWER reimagines Ankara's underutilized shopping malls as public-facing data
 
 
 ![Interior View](/img/bi-t-ower_axo.gif)
+
