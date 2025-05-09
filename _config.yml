@@ -90,3 +90,9 @@ exclude:
   - command.txt
   - _temp/index.html
   - _temp/
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:name

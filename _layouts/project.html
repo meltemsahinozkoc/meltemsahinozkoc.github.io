@@ -1,3 +1,42 @@
 ---
 layout: default
 ---
+<article class="project">
+  <header class="project-header">
+    <h1 class="project-title">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <h2 class="project-subtitle">{{ page.subtitle }}</h2>
+    {% endif %}
+    
+    <div class="project-meta">
+      {% if page.type %}
+      <span class="project-type">{{ page.type }}</span>
+      {% endif %}
+      {% if page.venue %}
+      <span class="project-venue">{{ page.venue }}</span>
+      {% endif %}
+      {% if page.location %}
+      <span class="project-location">{{ page.location }}</span>
+      {% endif %}
+      {% if page.year %}
+      <span class="project-year">{{ page.year }}</span>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if page.image %}
+  <div class="project-image">
+    <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+  </div>
+  {% endif %}
+
+  <div class="project-content">
+    {{ content }}
+  </div>
+
+  {% if page.website %}
+  <div class="project-links">
+    <a href="{{ page.website }}" class="project-website" target="_blank">View Project Website</a>
+  </div>
+  {% endif %}
+</article>
