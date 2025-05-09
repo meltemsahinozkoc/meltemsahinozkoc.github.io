@@ -8,7 +8,7 @@ type: "Architectural Design"
 venue: "Middle East Technical University"
 location: "Turkiye"
 year: "2024"
-image: "images/bi-t-ower_axo.gif"
+image: "images/bitower.gif"
 authors: "<strong>Meltem Sahin Ozkoc</strong>"
 website: "https://meltemsahinozkoc.github.io/bitower"
 ---
@@ -36,7 +36,7 @@ The project explores the intersection of:
 - Data storage and processing
 
 ## Gallery
-![Project Overview](/images/bi-t-ower_axo.gif)
+![Project Overview](/images/bitower_axo.gif)
 
 ## Process
 [Development process and methodology to be added]
