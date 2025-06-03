@@ -1,42 +1,85 @@
----
-layout: default
----
-<article class="project">
-  <header class="project-header">
-    <h1 class="project-title">{{ page.title }}</h1>
-    {% if page.subtitle %}
-    <h2 class="project-subtitle">{{ page.subtitle }}</h2>
-    {% endif %}
+<!DOCTYPE HTML>
+<html lang="en" data-theme="light">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.name }}</title>
+    <meta name="author" content="{{ site.name }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ site.baseurl }}/images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  </head>
+
+  <body>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light theme">
+      <i class="fas fa-moon"></i>
+    </button>
     
-    <div class="project-meta">
-      {% if page.type %}
-      <span class="project-type">{{ page.type }}</span>
-      {% endif %}
-      {% if page.venue %}
-      <span class="project-venue">{{ page.venue }}</span>
-      {% endif %}
-      {% if page.location %}
-      <span class="project-location">{{ page.location }}</span>
-      {% endif %}
-      {% if page.year %}
-      <span class="project-year">{{ page.year }}</span>
-      {% endif %}
-    </div>
-  </header>
+    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+      <tbody>
+        <tr style="padding:0px">
+          <td style="padding:0px">
+            
+            <!-- Navigation -->
+            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+              <tbody>
+                <tr style="padding:0px">
+                  <td style="padding:2.5%;width:100%;vertical-align:middle">
+                    <p style="text-align:center">
+                      <a href="{{ site.baseurl }}/">Home</a> &nbsp;/&nbsp;
+                      <a href="{{ site.baseurl }}/#projects">Projects</a> &nbsp;/&nbsp;
+                      <a href="mailto:{{ site.footer-links.email }}">Contact</a>
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-  {% if page.image %}
-  <div class="project-image">
-    <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
-  </div>
-  {% endif %}
+            <!-- Main Content -->
+            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+              <tbody>
+                <tr>
+                  <td style="padding:16px;width:100%;vertical-align:middle">
+                    {{ content }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-  <div class="project-content">
-    {{ content }}
-  </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  {% if page.website %}
-  <div class="project-links">
-    <a href="{{ page.website }}" class="project-website" target="_blank">View Project Website</a>
-  </div>
-  {% endif %}
-</article>
+    <script>
+      function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update the icon
+        const icon = document.querySelector('.theme-toggle i');
+        if (newTheme === 'dark') {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+        } else {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+        }
+      }
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      // Set initial icon based on saved theme
+      const icon = document.querySelector('.theme-toggle i');
+      if (savedTheme === 'dark') {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    </script>
+  </body>
+</html>
