@@ -50,9 +50,9 @@
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
               <tr>
               <td style="padding:16px;width:100%;vertical-align:middle">
-                <h2 id="projects">Research & Projects</h2>
+                <h2 id="projects">Projects</h2>
                 <p>
-                  My work spans architecture, technology, and sustainability, exploring the intersection of digital innovation and built environments.
+                  Works that span architecture, technology, and energy in the built environments.
                 </p>
               </td>
             </tr>
@@ -97,9 +97,24 @@
     </tr>
 
     <!-- BLUE-PRINT-GREEN-DESIGN Project -->
-    <tr bgcolor="#f9f9f9" style="color: var(--text-color);">
+    <tr onmouseout="blueprint_stop()" onmouseover="blueprint_start()" bgcolor="#f5f5f5" style="color: var(--text-color);">
       <td style="padding:16px;width:20%;vertical-align:middle">
-        <img src='images/blue-print.gif' width="160" style="opacity: 1;">
+        <div class="one">
+          <div class="two" id='blueprint_gif'>
+            <img src='images/blue-print.gif' width="160" style="opacity: 0; position: absolute; top: 0; left: 0;">
+          </div>
+          <img src='images/blue-print.gif' width="160" style="opacity: 1;">
+        </div>
+        <script type="text/javascript">
+          function blueprint_start() {
+            document.getElementById('blueprint_gif').style.opacity = "1";
+          }
+
+          function blueprint_stop() {
+            document.getElementById('blueprint_gif').style.opacity = "0";
+          }
+          blueprint_stop()
+        </script>
       </td>
       <td style="padding:8px;width:80%;vertical-align:middle;color: var(--text-color);">
         <a href="https://meltemsahinozkoc.github.io/projects/blue-print-green-design">
@@ -114,6 +129,44 @@
         <p style="color: var(--text-color);">
           BLUEPRINT GREEN DESIGN is an interactive, free, accessible and low-size app for anyone who wants to create and visualize simple building plans in 2D,
           calculate and visualize their heat loss, and get energy analysis for each component to make informed decisions to improve energy efficiency.
+        </p>
+      </td>
+    </tr>
+
+    <!-- FOOD DIARIES Project -->
+    <tr onmouseout="fooddiary_stop()" onmouseover="fooddiary_start()" bgcolor="#f5f5f5" style="color: var(--text-color);">
+      <td style="padding:16px;width:20%;vertical-align:middle">
+        <div class="one">
+          <div class="two" id='fooddiary_gif'>
+            <img src='images/food-diary.gif' width="160" style="opacity: 0; position: absolute; top: 0; left: 0;">
+          </div>
+          <img src='images/food-diary.gif' width="160" style="opacity: 1;">
+        </div>
+        <script type="text/javascript">
+          function fooddiary_start() {
+            document.getElementById('fooddiary_gif').style.opacity = "1";
+          }
+
+          function fooddiary_stop() {
+            document.getElementById('fooddiary_gif').style.opacity = "0";
+          }
+          fooddiary_stop()
+        </script>
+      </td>
+      <td style="padding:8px;width:80%;vertical-align:middle;color: var(--text-color);">
+        <a href="https://meltemsahinozkoc.github.io/projects/foodiaries">
+          <span class="papertitle">FOOD DIARIES</span>
+        </a>
+        <br>
+        <a href="https://meltemsahinozkoc.github.io/">Meltem Sahin Ozkoc</a>
+        <br>
+        <em style="color: var(--text-color);">Personal Project</em>, <span style="color: var(--text-color);">2024</span>
+        <br>
+        <a href="https://meltemsahinozkoc.github.io/projects/foodiaries">project page</a> / 
+        <a href="https://www.instagram.com/oncekahvem/">instagram</a>
+        <p style="color: var(--text-color);">
+          A visual documentation of culinary discoveries across cities and cultures. From local hawker centers to hidden gems, 
+          this project captures the stories behind every meal and the communities that create them.
         </p>
       </td>
     </tr>
