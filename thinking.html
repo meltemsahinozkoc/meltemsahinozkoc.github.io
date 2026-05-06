@@ -5,20 +5,39 @@ permalink: /thinking/
 ---
 
 <article class="writing-list">
-  <header style="margin-bottom: 32px;">
+  <header style="margin-bottom: 24px;">
     <h1 style="font-size: 32px; margin: 0 0 8px;">Thinking</h1>
-    <p style="opacity: 0.75; margin: 0;">Essays on architecture, art, heritage and the city.</p>
+    <p style="opacity: 0.75; margin: 0;">Essays on architecture, art, heritage, the city — and a few detours.</p>
   </header>
 
+  {% assign sorted = site.writings | sort: "date" | reverse %}
+  {% assign categories = sorted | map: "category" | uniq | compact | sort %}
+
+  <div class="writing-filters" data-writing-filters>
+    <button type="button" class="writing-chip is-active" data-category="all">All<span class="writing-chip__count">{{ sorted | size }}</span></button>
+    {% for c in categories %}
+      {% assign in_cat = sorted | where: "category", c %}
+      <button type="button" class="writing-chip" data-category="{{ c | escape }}">{{ c }}<span class="writing-chip__count">{{ in_cat | size }}</span></button>
+    {% endfor %}
+    <button type="button" class="writing-sort" data-sort-toggle data-order="desc"
+            aria-label="Toggle sort order" title="Toggle sort order">
+      <span class="writing-sort__icon" aria-hidden="true">↓</span>
+    </button>
+  </div>
+
   <ul class="writing-index">
-    {% assign sorted = site.writings | sort: "date" | reverse %}
     {% for w in sorted %}
-      <li class="writing-index__item">
+      <li class="writing-index__item" data-category="{{ w.category | default: 'Uncategorised' | escape }}">
         <a href="{{ w.url | relative_url }}" class="writing-index__link">
           <span class="writing-index__title">{{ w.title }}</span>
-          {% if w.date %}
-            <span class="writing-index__date">{{ w.date | date: "%b %Y" }}</span>
-          {% endif %}
+          <span class="writing-index__right">
+            {% if w.category %}
+              <span class="writing-index__chip">{{ w.category }}</span>
+            {% endif %}
+            {% if w.date %}
+              <span class="writing-index__date">{{ w.date | date: "%b %-d, %Y" }}</span>
+            {% endif %}
+          </span>
         </a>
         {% if w.excerpt_short %}
           <p class="writing-index__excerpt">{{ w.excerpt_short }}</p>
@@ -27,3 +46,35 @@ permalink: /thinking/
     {% endfor %}
   </ul>
 </article>
+
+<script>
+(function () {
+  var filters = document.querySelector('[data-writing-filters]');
+  if (!filters) return;
+  var list = document.querySelector('.writing-index');
+  var items = document.querySelectorAll('.writing-index__item');
+
+  filters.addEventListener('click', function (e) {
+    var btn = e.target.closest('.writing-chip');
+    if (!btn) return;
+    filters.querySelectorAll('.writing-chip').forEach(function (b) { b.classList.remove('is-active'); });
+    btn.classList.add('is-active');
+    var c = btn.getAttribute('data-category');
+    items.forEach(function (li) {
+      li.hidden = (c !== 'all' && li.getAttribute('data-category') !== c);
+    });
+  });
+
+  var sortBtn = document.querySelector('[data-sort-toggle]');
+  if (sortBtn && list) {
+    sortBtn.addEventListener('click', function () {
+      var asc = sortBtn.getAttribute('data-order') === 'asc';
+      var next = asc ? 'desc' : 'asc';
+      sortBtn.setAttribute('data-order', next);
+      sortBtn.querySelector('.writing-sort__icon').textContent = next === 'desc' ? '↓' : '↑';
+      var children = Array.prototype.slice.call(list.children);
+      children.reverse().forEach(function (node) { list.appendChild(node); });
+    });
+  }
+})();
+</script>

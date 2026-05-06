@@ -67,13 +67,21 @@ a:hover {
   text-decoration: none;
 }
 
+body {
+  background-color: #F0EEE6;
+}
+
+[data-theme="dark"] body {
+  background-color: var(--dark-bg);
+}
+
 body,
 td,
 th,
 tr,
 p {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -95,9 +103,9 @@ strong {
 
 h2 {
   margin: 0;
-  font-weight: normal;
+  font-weight: 700;
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 32px;
 }
 
 .papertitle {
@@ -110,7 +118,7 @@ h2 {
   padding-top: 12px;
   margin: 0 0 12px;
   font-family: var(--font-body);
-  font-size: clamp(40px, 6vw, 64px);
+  font-size: clamp(40px, 6vw, 44px);
   line-height: 1.05;
   letter-spacing: -0.025em;
   font-weight: 700;
@@ -317,6 +325,46 @@ span.highlight {
   border-radius: 8px;
 }
 
+/* Music page — wider container (1200px) so 2 videos per row breathe. */
+body.page-music .project {
+  max-width: 1400px;
+}
+
+/* Places page — keep the title/subtitle, but strip the website link and
+   the back-to-home link so only the title block + map remain. */
+body.page-places .project-links,
+body.page-places .project > div:last-child {
+  display: none;
+}
+
+/* The project shell goes full-width on this page; pull the header back
+   into a readable centered column so the title doesn't stretch edge-to-edge. */
+body.page-places .project-header {
+  max-width: 800px;
+  margin: 0 auto 1rem;
+  padding: 1rem 1rem 0;
+}
+
+/* Map fills the viewport width; iframe is oversized + offset so the
+   Google MyMaps top bar (title / share / fullscreen / profile) is cropped
+   off-screen. The visible area is just the map canvas. */
+.places-map {
+  position: relative;
+  width: 100%;
+  height: 65vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.places-map iframe {
+  position: absolute;
+  top: -64px;          /* crop the MyMaps title bar */
+  left: 0;
+  width: 100%;
+  height: calc(100% + 64px);
+  border: 0;
+}
+
 .project-content {
   line-height: 1.6;
   color: var(--text-color);
@@ -366,7 +414,7 @@ span.highlight {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: var(--primary-blue);
+  background-color: color-mix(in srgb, var(--primary-blue) 75%, transparent);
   pointer-events: none;
   z-index: 9999;
   will-change: transform;
@@ -376,14 +424,58 @@ span.highlight {
 }
 
 .cursor-dot.is-hover {
-  width: 18px;
-  height: 18px;
-  background-color: var(--accent-red);
+  width: 16px;
+  height: 16px;
+  background-color: color-mix(in srgb, var(--accent-red) 75%, transparent);
+}
+
+/* Soft spotlight that trails the cursor 1:1 — no easing so it stays glued
+   to the dot. Sits behind the dot. */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+                              color-mix(in srgb, var(--primary-blue) 22%, transparent) 0%,
+                              color-mix(in srgb, var(--primary-blue) 10%, transparent) 30%,
+                              transparent 65%);
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+  transform: translate3d(-50%, -50%, 0);
+  transition: background 0.25s ease, opacity 0.2s ease;
+}
+
+.cursor-glow.is-hover {
+  background: radial-gradient(circle,
+                              color-mix(in srgb, var(--accent-red) 22%, transparent) 0%,
+                              color-mix(in srgb, var(--accent-red) 10%, transparent) 30%,
+                              transparent 65%);
+}
+
+/* Glow reads as a soft white-blue against the dark background. */
+[data-theme="dark"] .cursor-glow {
+  background: radial-gradient(circle,
+                              color-mix(in srgb, var(--primary-blue) 30%, transparent) 0%,
+                              color-mix(in srgb, var(--primary-blue) 14%, transparent) 30%,
+                              transparent 65%);
+  mix-blend-mode: screen;
+}
+
+[data-theme="dark"] .cursor-glow.is-hover {
+  background: radial-gradient(circle,
+                              color-mix(in srgb, var(--accent-red) 30%, transparent) 0%,
+                              color-mix(in srgb, var(--accent-red) 14%, transparent) 30%,
+                              transparent 65%);
 }
 
 /* Hide custom cursor on touch / coarse pointers */
 @media (hover: none), (pointer: coarse) {
-  .cursor-dot {
+  .cursor-dot,
+  .cursor-glow {
     display: none;
   }
   .cursor-enabled,
@@ -852,6 +944,299 @@ span.highlight {
   opacity: 0.7;
 }
 
+/* Music — YouTube video gallery */
+.music {
+  margin: 0 auto;
+}
+
+.music__filters {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 14px 18px;
+  background: var(--light-secondary-bg);
+  border-radius: 8px;
+}
+
+[data-theme="dark"] .music__filters {
+  background: var(--dark-secondary-bg);
+}
+
+.music__filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.music__label {
+  font-weight: 700;
+  font-size: 13px;
+  min-width: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.music__count {
+  font-size: 13px;
+  opacity: 0.7;
+  margin: 0 0 14px;
+}
+
+.music__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 480px) {
+  .music__grid { grid-template-columns: 1fr; }
+}
+
+.music__card {
+  background: var(--light-bg);
+  border: 1px solid var(--light-secondary-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: var(--light-text);
+  transition: border-color var(--duration-base) var(--ease-out-cubic),
+              transform var(--duration-base) var(--ease-out-cubic),
+              box-shadow var(--duration-base) var(--ease-out-cubic);
+}
+
+.music__card:hover {
+  border-color: var(--primary-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="dark"] .music__card,
+[data-theme="dark"] .music__card:hover {
+  background: var(--dark-secondary-bg);
+  border-color: var(--dark-secondary-bg);
+  color: var(--dark-text);
+}
+
+[data-theme="dark"] .music__card:hover {
+  border-color: var(--primary-blue);
+}
+
+.music__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.music__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--duration-base) var(--ease-out-cubic),
+              filter var(--duration-fast) var(--ease-out-cubic);
+}
+
+.music__card:hover .music__media img {
+  transform: scale(1.03);
+  filter: brightness(0.92);
+}
+
+.music__media iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.music__play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out-cubic);
+}
+
+.music__play:hover {
+  transform: scale(1.06);
+}
+
+.music__duration {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.78);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+.music__body {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.music__title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.music__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.music__pill {
+  background: var(--light-secondary-bg);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+[data-theme="dark"] .music__pill {
+  background: var(--dark-bg);
+}
+
+.music__empty {
+  padding: 40px 20px;
+  text-align: center;
+  border: 1px dashed var(--light-secondary-bg);
+  border-radius: 8px;
+  opacity: 0.7;
+}
+
+/* Thinking — category filter chips */
+.writing-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 24px;
+}
+
+.writing-chip {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--light-secondary-bg);
+  background: var(--light-bg);
+  color: var(--light-text);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out-cubic),
+              border-color var(--duration-fast) var(--ease-out-cubic),
+              color var(--duration-fast) var(--ease-out-cubic);
+}
+
+.writing-chip:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.writing-chip.is-active {
+  background: var(--primary-blue);
+  color: #fff;
+  border-color: var(--primary-blue);
+}
+
+[data-theme="dark"] .writing-chip {
+  background: var(--dark-bg);
+  color: var(--dark-text);
+  border-color: var(--dark-secondary-bg);
+}
+
+.writing-chip__count {
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 400;
+  color: #888;
+  font-variant-numeric: tabular-nums;
+}
+
+.writing-chip.is-active .writing-chip__count {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+[data-theme="dark"] .writing-chip__count { color: #888; }
+
+/* Sort toggle (newest ↔ oldest) — sits at the right end of the filter row */
+.writing-sort {
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--light-secondary-bg);
+  border-radius: 999px;
+  color: var(--light-text);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out-cubic),
+              color var(--duration-fast) var(--ease-out-cubic);
+}
+
+.writing-sort:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.writing-sort__icon {
+  font-size: 14px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-theme="dark"] .writing-sort {
+  color: var(--dark-text);
+  border-color: var(--dark-secondary-bg);
+}
+
+/* Per-row category pill (sits next to the date in the index) */
+.writing-index__right {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.writing-index__chip {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--light-secondary-bg);
+  color: var(--light-text);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .writing-index__chip {
+  background: var(--dark-secondary-bg);
+  color: var(--dark-text);
+}
+
 /* Thinking — writings index (arslan.io-style hover micro-interactions) */
 .writing-index {
   list-style: none;
@@ -871,14 +1256,6 @@ span.highlight {
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
-.writing-index__item:hover {
-  border-bottom-color: var(--primary-blue);
-}
-
-[data-theme="dark"] .writing-index__item:hover {
-  border-bottom-color: var(--accent-red);
-}
-
 .writing-index__link {
   position: relative;
   display: flex;
@@ -889,18 +1266,12 @@ span.highlight {
   text-decoration: none;
   color: inherit;
   transition: transform var(--duration-base) var(--ease-out-cubic),
-              padding-left var(--duration-base) var(--ease-out-cubic),
-              background-color var(--duration-base) var(--ease-out-cubic);
+              padding-left var(--duration-base) var(--ease-out-cubic);
 }
 
-/* Slide right + faint background tint on hover. */
+/* Slide right on hover — no background tint. */
 .writing-index__link:hover {
   transform: translateX(4px);
-  background-color: rgba(0, 122, 255, 0.04);
-}
-
-[data-theme="dark"] .writing-index__link:hover {
-  background-color: rgba(255, 59, 48, 0.07);
 }
 
 /* Arrow → slides in from the left edge of the right padding on hover. */
@@ -1187,9 +1558,9 @@ span.highlight {
 .section-divider {
   display: block;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
   height: 0;
-  margin: 56px auto;
+  margin: 42px auto;
   border: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.10);
 }
@@ -1206,6 +1577,20 @@ span.highlight {
   color: #9a9a9a;
 }
 
+.page-footer__map {
+  position: relative;
+  margin: 14px auto 0;
+  max-width: 180px;
+  opacity: 0.85;
+}
+
+.page-footer__map img,
+.page-footer__map svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 .page-footer a {
   color: inherit;
   border-bottom: 1px dotted currentColor;
@@ -1214,6 +1599,15 @@ span.highlight {
 .page-footer a:hover {
   color: var(--primary-blue);
   border-bottom-color: var(--primary-blue);
+}
+
+.page-footer a.page-footer__map-link,
+.page-footer a.page-footer__map-link:hover {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-bottom: 0;
+  cursor: pointer;
 }
 
 [data-theme="dark"] .page-footer { color: #6e6e6e; }
@@ -1245,6 +1639,7 @@ span.highlight {
   padding: 0 16px;
 }
 
+
 /* For pages that need full-width canvas (e.g. food diaries gallery). */
 body.page-wide .page-container {
   max-width: 1500px;
@@ -1255,6 +1650,50 @@ body.page-wide .page-container {
   text-align: center;
   padding: 18px 0 8px;
   font-size: 14px;
+}
+
+/* Back / forward — top-left, mirroring the theme toggle in the top-right.
+   Hits browser history directly; no stack tracking. */
+.page-history-nav {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 8px;
+  z-index: 50;
+}
+
+.page-history-nav__btn {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out-cubic),
+              border-color var(--duration-fast) var(--ease-out-cubic),
+              color var(--duration-fast) var(--ease-out-cubic);
+}
+
+.page-history-nav__btn:hover {
+  background-color: rgba(0, 122, 255, 0.08);
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+[data-theme="dark"] .page-history-nav__btn {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="dark"] .page-history-nav__btn:hover {
+  background-color: rgba(255, 59, 48, 0.12);
+  border-color: var(--accent-red);
+  color: var(--accent-red);
 }
 
 .page-main {

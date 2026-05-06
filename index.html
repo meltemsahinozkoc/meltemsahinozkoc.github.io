@@ -29,33 +29,77 @@ permalink: /
       <i class="fas fa-moon"></i>
     </button>
 
+    
+    
     <!-- Hero / about — full-bleed-ish, max ~1200px -->
     <section class="hero-band">
+      <hr class="section-divider" aria-hidden="true">
       <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;"><tbody>
             <tr style="padding:0px">
-              <td style="padding:2.5%;width:63%;vertical-align:middle">
+              <td style="padding:2.5%;width:60%;vertical-align:middle">
                 <p class="name" style="text-align: left;">
                   <b>Hi! I'm Meltem.</b>
                 </p>
-                <p style="font-size: 1.3em;">
+                <p style="font-size: 1.1em;">
                   <b>About.</b> I am a second-year Master of Science (M.Sc.) candidate at <a href="https://www.cmu.edu/">Carnegie Mellon University</a> and a Fulbright Scholar. Before joining CMU, I completed one year in TU Munich's Information Technologies for the Built Environment program. My current work focuses on multimodal understanding of the existing building stock and partially observable, sparse data.
                 </p>
 
-                <p style="font-size: 1.3em;"> <b>Say hi.</b> <a href="mailto:msahinoz@andrew.cmu.edu">msahinoz[at]andrew[dot]cmu[dot]edu</a></p>
-                <p style="text-align:left; font-size: 1.25em;">
+                <p style="font-size: 1.1em;"> <b>Say hi.</b> <a href="mailto:msahinoz@andrew.cmu.edu">msahinoz[at]andrew[dot]cmu[dot]edu</a></p>
+                <p style="font-size: 1.1em;"> <b>Contact.</b>
                   <a href="mailto:msahinoz@andrew.cmu.edu">Email</a> &nbsp;/&nbsp;
-                  <a href="https://docs.google.com/document/d/1FEco2-DSW3O6_JA93Tafcj0SDShuAN8h/edit?usp=sharing&ouid=105038649815962548067&rtpof=true&sd=true">Resumé</a> &nbsp;/&nbsp;
                   <a href="https://www.linkedin.com/in/meltemsahinozkoc/">Linkedin</a> &nbsp;/&nbsp;
-                  <a href="https://github.com/meltemsahinozkoc/">Github</a> &nbsp;/&nbsp;
-                  <a href="https://www.youtube.com/@meltemsahinozkoc">Youtube</a> &nbsp;/&nbsp;
-                  <a href="https://www.instagram.com/oncekahvem/">Food&Coffee</a>
+                  <a href="https://github.com/meltemsahinozkoc/">Github</a>
+                </p>
+                
+                <p style="font-size: 1.1em;"> <b>Links.</b>
+                  <a href="https://www.instagram.com/oncekahvem/">ig</a> &nbsp;/&nbsp;
+                  <a href="https://www.instagram.com/oncekahvem/">@oncekahvem</a> &nbsp;/&nbsp;
+                  <a href="https://www.instagram.com/iaminarchitecture/">@iaminarchitecture</a> &nbsp;/&nbsp;
+                  <a href="https://www.youtube.com/@meltemsahinozkoc">Youtube</a>
                 </p>
               </td>
               <td style="padding:2.5%;width:37%;max-width:37%">
-                <a href="{{ '/images/profile/profile_img.jpg' | relative_url }}"><img style="width:100%;max-width:100%;object-fit: cover;margin-top: 12px" alt="profile photo" src="{{ '/images/profile/profile_img.jpg' | relative_url }}" class="hoverZoomLink"></a>
+                <img style="width:100%;max-width:100%;object-fit: cover;margin-top: 12px" alt="profile photo" src="{{ '/images/profile/profile_img.jpg' | relative_url }}">
               </td>
             </tr>
           </tbody></table>
+    </section>
+
+    <hr class="section-divider" aria-hidden="true">
+
+    <!-- Side projects — narrow column -->
+    <section class="narrow">
+      <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;"><tbody>
+        <tr>
+          <td style="padding:16px 0;width:100%;vertical-align:middle">
+            <h2 id="side-projects">Side projects</h2>
+            <p>Smaller experiments and ongoing personal work. An attempt to <a href="https://www.swyx.io/learn-in-public" target="_blank" rel="noopener">learn in public</a>. </p>
+          </td>
+        </tr>
+      </tbody></table>
+
+      <div class="side-projects-grid">
+        <a class="side-project" href="{{ '/projects/foodiaries/' | relative_url }}">
+          <p class="side-project__title">@oncekahvem</p>
+          <p class="side-project__meta">Notes on coffee &amp; food</p>
+        </a>
+        <a class="side-project" href="{{ '/thinking/' | relative_url }}">
+          <p class="side-project__title">Thinking</p>
+          <p class="side-project__meta">Essays on anything</p>
+        </a>
+        <a class="side-project" href="{{ '/projects/music/' | relative_url }}">
+          <p class="side-project__title">Music</p>
+          <p class="side-project__meta">Selected covers</p>
+        </a>
+        <a class="side-project" href="{{ '/projects/odtudeyemek/' | relative_url }}">
+          <p class="side-project__title">@odtudeyemek</p>
+          <p class="side-project__meta">An undergrad's campus food guide</p>
+        </a>
+        <a class="side-project" href="{{ '/projects/places/' | relative_url }}">
+          <p class="side-project__title">Travel log</p>
+          <p class="side-project__meta">A map of places I've visited</p>
+        </a>
+      </div>
     </section>
 
     <hr class="section-divider" aria-hidden="true">
@@ -66,7 +110,7 @@ permalink: /
         <tr>
           <td style="padding:16px 0;width:100%;vertical-align:middle">
             <h2 id="projects">Projects</h2>
-            <p>Works that span architecture, technology, and energy in the built environments.</p>
+            <p>Works that span architecture, energy, and technology in the built environment.</p>
           </td>
         </tr>
       </tbody></table>
@@ -108,34 +152,15 @@ permalink: /
       </tbody></table>
     </section>
 
-    <hr class="section-divider" aria-hidden="true">
 
-    <!-- Side projects — narrow column -->
-    <section class="narrow">
-      <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;"><tbody>
-        <tr>
-          <td style="padding:16px 0;width:100%;vertical-align:middle">
-            <h2 id="side-projects">Side projects</h2>
-            <p>Smaller experiments and ongoing personal work.</p>
-          </td>
-        </tr>
-      </tbody></table>
-
-      <div class="side-projects-grid">
-        <a class="side-project" href="{{ '/projects/foodiaries/' | relative_url }}">
-          <p class="side-project__title">Food & Coffee Diaries</p>
-          <p class="side-project__meta"><b>@oncekahvem.</b>  coffee &amp; food field notes archive</p>
-        </a>
-        <a class="side-project" href="{{ '/thinking/' | relative_url }}">
-          <p class="side-project__title">Thinking</p>
-          <p class="side-project__meta">Essays on anything</p>
-        </a>
-      </div>
-    </section>
 
     <footer class="page-footer">
-      Built with <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a>
-      on <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>.
+      Built with <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a>.
+      © 2026 Meltem Sahin Ozkoc
+      <div class="page-footer__map" aria-label="Visitor map">
+        <script type="text/javascript" id="clustrmaps" src="https://clustrmaps.com/map_v2.js?cl=080808&w=a&t=n&d=vwpxcF0bS4CJsQBrYgVCFtRukOKI00iBXCoRMtfmxvE&co=ffffff&ct=808080&cmo=3acc3a&cmn=ff5353"></script>
+        <a class="page-footer__map-link" href="https://clustrmaps.com/site/1c6no" target="_blank" rel="noopener" aria-label="View full visitor map on Clustrmaps"></a>
+      </div>
     </footer>
 
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>

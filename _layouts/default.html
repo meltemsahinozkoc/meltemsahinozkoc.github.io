@@ -18,10 +18,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
 
-  <body class="{% if page.permalink contains '/foodiaries/' %}page-wide{% endif %}">
+  <body class="{% if page.permalink contains '/foodiaries/' or page.permalink contains '/places/' %}page-wide{% endif %}{% if page.permalink contains '/places/' %} page-places{% endif %}{% if page.permalink contains '/music/' %} page-music{% endif %}">
     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light theme">
       <i class="fas fa-moon"></i>
     </button>
+
+    <nav class="page-history-nav" aria-label="History">
+      <button type="button" class="page-history-nav__btn" onclick="history.back()" aria-label="Go back" title="Back">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <button type="button" class="page-history-nav__btn" onclick="history.forward()" aria-label="Go forward" title="Forward">
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </nav>
 
     <div class="page-container">
 
@@ -39,9 +48,7 @@
     </div>
 
     <footer class="page-footer">
-      Built with <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a>
-      on <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>.
-      <a href="https://github.com/meltemsahinozkoc/meltemsahinozkoc.github.io" target="_blank" rel="noopener">Source</a>.
+      © 2026 Meltem Sahin Ozkoc
     </footer>
 
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>

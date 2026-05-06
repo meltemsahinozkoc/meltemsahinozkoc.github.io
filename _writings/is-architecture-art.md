@@ -1,20 +1,33 @@
 ---
 layout: writing
-title: "Is Architecture Art?"
-date: 2024-11-08
+title: "“Is Architecture Art?”"
+date: 2023-06-19
+category: "Architecture"
 excerpt_short: "Beginning with Popper's falsifiability and ending at the Mâçka Art Gallery exhibition: a small argument that architecture is art."
-source_url: "https://www.meltemsahin.rocks/post/is-architecture-art"
-source_label: "meltemsahin.rocks"
+source_url: "https://sahinsmeltem.medium.com/is-architecture-art-650913849cdf"
+source_label: "Medium"
 ---
 
-![Where are we? — exhibition view]({{ '/images/writings/is-architecture-art/01.png' | relative_url }})
+To initiate a discussion on the relationship between art and architecture, I believe, one should have a belief in the definition of art and architecture as blended identities. This belief can only then turn into a discourse through supported arguments, observations and statements that highlight the moments of inspiration for observers. Karl Popper’s scientific methodology[1] which employs the theory of falsification provides an initial framework for this discourse. By acknowledging the potential for theories to be falsified and recognizing the existence of counterexamples, we can explore the concept of “rightifiers” as the antithesis of falsifiers. Only with the help of this kind of a framework, this little essay and novice author can argue the unified entities of art and architecture. It, then, reinforces our belief into the unified nature of art and architecture and this may change the header this way: “**Architecture is Art!”**
 
-To initiate a discussion on the relationship between art and architecture, I believe one should have a belief in the definition of art and architecture as blended identities. This belief can only then turn into a discourse through supported arguments, observations and statements that highlight the moments of inspiration for observers. Karl Popper's scientific methodology, which employs the theory of falsification, provides an initial framework for this discourse. By acknowledging the potential for theories to be falsified and recognizing the existence of counterexamples, we can explore the concept of "rightifiers" as the antithesis of falsifiers. Only with the help of this kind of a framework can this little essay and novice author argue the unified entities of art and architecture. It, then, reinforces our belief in the unified nature of art and architecture, and this may change the header this way: **Architecture is Art!**
+The recent exhibition titled “Where are we?” [2] held at *Macka Art Gallery* and temporarily hosted by the *Erimtan Archaeology and Arts Museum* focused on the urban phenomenon over the past 70 years. The exhibition aimed to reexamine the connections between the city, as the realm of people and their creations, and featured a broader range of artists from Ankara, in addition to those from Istanbul [3]. The exhibition showcased a variety of mixed-media and material usage, including*steelwork, forex, model cardboard, and c-prints.* This exploration of technique and material prompts a consideration of their role in the creation and final manifestation of artwork, which can be related to the architectural process. While the nature of architectural pieces may vary based on program and intent, it is not far-fetched to argue that most architectural works can be approached and interpreted in a similar manner as artworks. The difference lies in the viewer’s engagement with the volumetric space created by architecture. In contrast, art is often perceived as existing within plain canvases. The exhibition’s inclusion of mixed media is significant as it allowed certain artworks to evoke a sense of three-dimensionality, even on a small scale [4].
 
-The recent exhibition titled "Where are we?" held at *Macka Art Gallery* and temporarily hosted by the *Erimtan Archaeology and Arts Museum* focused on the urban phenomenon over the past 70 years. The exhibition aimed to reexamine the connections between the city, as the realm of people and their creations, and featured a broader range of artists from Ankara, in addition to those from Istanbul. The exhibition showcased a variety of mixed-media and material usage, including *steelwork, forex, model cardboard, and c-prints*. This exploration of technique and material prompts a consideration of their role in the creation and final manifestation of artwork, which can be related to the architectural process. While the nature of architectural pieces may vary based on program and intent, it is not far-fetched to argue that most architectural works can be approached and interpreted in a similar manner as artworks. The difference lies in the viewer's engagement with the volumetric space created by architecture. In contrast, art is often perceived as existing within plain canvases. The exhibition's inclusion of mixed media is significant as it allowed certain artworks to evoke a sense of three-dimensionality, even on a small scale.
+![(4) Excerpts from the exhibition — 3d. Shot by the author.]({{ '/images/writings/is-architecture-art/01.png' | relative_url }})
+***[4] Excerpts from the exhibition — 3d. Shot by the author.***
 
-![From the "Where are we?" exhibition]({{ '/images/writings/is-architecture-art/02.png' | relative_url }})
+This introduction of an additional dimension to the artist’s creation adds depth to the final artwork. Furthermore, the deliberate use of patterns to create a three-dimensional effect on canvas was a particularly captivating aspect of the exhibition. [5]
 
-This introduction of an additional dimension to the artist's creation adds depth to the final artwork. Furthermore, the deliberate use of patterns to create a three-dimensional effect on canvas was a particularly captivating aspect of the exhibition.
+![(5) Excerpts from the exhibition — 2d, pattern. Shot by the author.]({{ '/images/writings/is-architecture-art/02.png' | relative_url }})
+***[5] Excerpts from the exhibition — 2d, pattern. Shot by the author.***
 
-The intentional reading of "*repetitive*" architecture as a theme was inspiring, as it shed light on the monotony and disharmony generated by prevalent architectural patterns. Additionally, it showcased the inherent power of patterns to transform a two-dimensional surface into a three-dimensional experience. The immersion of architectural elements within the artworks convincingly demonstrated the interconnectedness of art and architecture. Many pieces reflected common aspects found in both forms of expression, such as composition, materiality, context, and design. Thus, the statement in the header can be revised once more: **Art is Architecture as Architecture is Art!**
+The intentional reading of “*repetitive*” architecture as a theme was inspiring, as it shed light on the monotony and disharmony generated by prevalent architectural patterns. Additionally, it showcased the inherent power of patterns to transform a two-dimensional surface into a three-dimensional experience. The immersion of architectural elements within the artworks convincingly demonstrated the interconnectedness of art and architecture. Many pieces reflected common aspects found in both forms of expression, such as composition, materiality, context, and design. Thus, the statement in the header can be revised once more: “**Art is Architecture as Architecture is Art!”**
+
+[1] Popper, K. R. (1959). The logic of scientific discovery. Basic Books.
+
+[2] Macka Sanat Galerisi (MSG). (2023). Retrieved 23 May 2023, from [https://www.mackasanatgalerisi.com/English/Exhibitions/Neredeyiz-Erimtan-Arkeoloji-ve-Sanat-Muzesi-Karma-Sergi-0](https://www.mackasanatgalerisi.com/English/Exhibitions/Neredeyiz-Erimtan-Arkeoloji-ve-Sanat-Muzesi-Karma-Sergi-0)
+
+[3] Exhibitions. (2023). Retrieved 23 May 2023, from [https://erimtanmuseum.org/en/exhibitions.](https://erimtanmuseum.org/en/exhibitions.)
+
+[4]**From left to the right:** “Uygarlık I” (Civilization I), by Akın Güreş, 2018 ; “Yükselen Değer” (Rising Value), by Akın Güreş, 2021 ; “Tüm Renkler Solduğunda” (When All Colors Faded), by Güneş Çınar, 2018 ; “Human Extension — Integumentum Commune”, by Fatih Kızılcan, 2023
+
+[5] **From left to the right:** “Başka Taş Başka Hamam VIII” (Business as Unusual — VIII), by Murat Germen, 2020 ; “Şehir Manzarası” (City Scape), by Hakan Gündüz, 2023 ; “Dışarıda XXXVII” (Outside XXXVII), by Rüçhan Şahinoğlu, 2023 ; “İsimsiz” (Untitled), by Oğuz Kaleli, 2023

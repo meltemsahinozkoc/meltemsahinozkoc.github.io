@@ -1,10 +1,11 @@
 ---
 layout: writing
 title: "Labrouste's Libraries: Impact & Transformation"
-date: 2024-11-08
+date: 2021-04-17
+category: "Architecture"
 excerpt_short: "On Henri Labrouste, his hybrid stone-and-iron libraries, and how he reframed the role of structure and light in 19th-century architecture."
-source_url: "https://www.meltemsahin.rocks/post/labrouste-s-libraries-impact-transformation"
-source_label: "meltemsahin.rocks"
+source_url: "https://sahinsmeltem.medium.com/labroustes-libraries-impact-transformation-ec99942dc8cc"
+source_label: "Medium"
 ---
 
 ![Bibliothèque Sainte-Geneviève — façade detail]({{ '/images/writings/labroustes-libraries-impact-transformation/01.png' | relative_url }})

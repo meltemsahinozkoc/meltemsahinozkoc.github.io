@@ -1,12 +1,13 @@
 ---
 layout: writing
 title: "At the crossroads of \"Orient\" and \"Orientalism\""
-date: 2024-11-08
+date: 2021-01-03
+category: "Other"
 excerpt_short: "An interpretation of Edward Said's Orientalism — on how the Orient becomes manageable through marginalisation."
-source_url: "https://www.meltemsahin.rocks/post/at-the-crossroads-of-orient-and-orientalism"
-source_label: "meltemsahin.rocks"
+source_url: "https://sahinsmeltem.medium.com/at-the-crossroads-of-orient-and-orientalism-6e69d08a2974"
+source_label: "Medium"
 ---
-<img src="{{ '/images/writings/at-the-crossroads-of-orient-and-orientalism/01.png' | relative_url }}" alt="Diyarbakır urban analysis" style="width:100%; max-width:1100px; height:auto; display:block; margin:0 auto;" />
+<img src="{{ '/images/writings/at-the-crossroads-of-orient-and-orientalism/01.png' | relative_url }}" alt="At the crossroads of Orient and Orientalism" style="width:100%; max-width:1100px; height:auto; display:block; margin:0 auto;" />
 
 *This story is intended to be an interpretation of Edward Said's well-known book "Orientalism".*
 
