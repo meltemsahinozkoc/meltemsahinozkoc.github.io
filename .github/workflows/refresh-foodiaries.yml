@@ -1,0 +1,81 @@
+name: Refresh Food Diaries
+
+# Refreshes assets/data/foodiaries.json from the Instagram Graph API,
+# then refreshes the long-lived access token so it never expires
+# (long-lived IG tokens last 60 days; we run monthly to keep them alive).
+
+on:
+  schedule:
+    # 06:00 UTC on the 1st of every month
+    - cron: "0 6 1 * *"
+  workflow_dispatch:   # also runnable manually from the Actions tab
+
+permissions:
+  contents: write       # to commit foodiaries.json back to main
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Refresh long-lived access token
+        id: refresh-token
+        env:
+          META_APP_ID: ${{ secrets.META_APP_ID }}
+          META_APP_SECRET: ${{ secrets.META_APP_SECRET }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: |
+          set -euo pipefail
+          response=$(curl -sG "https://graph.facebook.com/v21.0/oauth/access_token" \
+            --data-urlencode "grant_type=fb_exchange_token" \
+            --data-urlencode "client_id=${META_APP_ID}" \
+            --data-urlencode "client_secret=${META_APP_SECRET}" \
+            --data-urlencode "fb_exchange_token=${IG_ACCESS_TOKEN}")
+          fresh_token=$(printf '%s' "$response" \
+            | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('access_token') or sys.exit(f'token-refresh failed: {d}'))")
+          # Mask the new token in the workflow logs.
+          echo "::add-mask::${fresh_token}"
+          echo "fresh_token=${fresh_token}" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch and parse media
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ steps.refresh-token.outputs.fresh_token }}
+        run: |
+          python3 scripts/refresh_foodiaries.py
+
+      - name: Update IG_ACCESS_TOKEN secret (so the next run uses the fresh one)
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          FRESH_TOKEN: ${{ steps.refresh-token.outputs.fresh_token }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::warning::GH_PAT secret is not set. Skipping token rotation."
+            echo "Without it, IG_ACCESS_TOKEN will expire 60 days after it was first stored."
+            echo "To fix: create a fine-grained PAT with 'Actions: write' on this repo and add it as GH_PAT."
+            exit 0
+          fi
+          # gh CLI (preinstalled) needs a PAT with 'Actions: write' to set secrets.
+          gh secret set IG_ACCESS_TOKEN --body "$FRESH_TOKEN" --repo "${{ github.repository }}"
+          echo "rotated IG_ACCESS_TOKEN; next run will use the freshly-extended token"
+
+      - name: Commit changes
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- assets/data/foodiaries.json; then
+            echo "no changes to commit"
+            exit 0
+          fi
+          git add assets/data/foodiaries.json assets/data/foodiaries-city-tags.txt
+          git commit -m "chore: refresh foodiaries data $(date -u +%Y-%m-%d)"
+          git push

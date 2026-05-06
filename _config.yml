@@ -75,6 +75,9 @@ kramdown:
 sass:
   style: :compressed # You might prefer to minify using :compressed
 
+# Force UTF-8 to avoid SCSS converter ASCII errors on Ruby 3+
+encoding: utf-8
+
 # Use the following plug-ins
 plugins:
       - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
@@ -96,3 +99,6 @@ collections:
   projects:
     output: true
     permalink: /:collection/:name
+  writings:
+    output: true
+    permalink: /thinking/:name/

@@ -1,0 +1,29 @@
+---
+layout: default
+title: "Thinking"
+permalink: /thinking/
+---
+
+<article class="writing-list">
+  <header style="margin-bottom: 32px;">
+    <h1 style="font-size: 32px; margin: 0 0 8px;">Thinking</h1>
+    <p style="opacity: 0.75; margin: 0;">Essays on architecture, art, heritage and the city.</p>
+  </header>
+
+  <ul class="writing-index">
+    {% assign sorted = site.writings | sort: "date" | reverse %}
+    {% for w in sorted %}
+      <li class="writing-index__item">
+        <a href="{{ w.url | relative_url }}" class="writing-index__link">
+          <span class="writing-index__title">{{ w.title }}</span>
+          {% if w.date %}
+            <span class="writing-index__date">{{ w.date | date: "%b %Y" }}</span>
+          {% endif %}
+        </a>
+        {% if w.excerpt_short %}
+          <p class="writing-index__excerpt">{{ w.excerpt_short }}</p>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</article>

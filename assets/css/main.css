@@ -1,0 +1,1070 @@
+/* Global color palette */
+:root {
+  /* Brand */
+  --primary-blue: #0000FF;   /* links, cursor */
+  --accent-red:   #D60311;   /* link hover */
+
+  /* Light theme */
+  --light-bg: #ffffff;
+  --light-text: #333333;
+  --light-secondary-bg: #f5f5f5;
+  --light-highlight: #ffffd0;
+
+  /* Dark theme */
+  --dark-bg: #1a1a1a;
+  --dark-text: #ffffff;
+  --dark-secondary-bg: #2d2d2d;
+  --dark-highlight: #2d2d2d;
+
+  /* Misc */
+  --black: #000000;
+  --white: #ffffff;
+  --transparent: transparent;
+}
+
+/* ================================================================
+   Body font.
+
+   1. Pick ONE preset below by uncommenting its --font-body line.
+   2. Update the Google Fonts <link> in _layouts/default.html and
+      index.html with the matching URL on the right.
+   3. Hard-reload the browser.
+
+   Preset                   --font-body                                            Google Fonts URL
+   --------                 -----------                                            ----------------
+   Inter (default)          'Inter', system-ui, sans-serif                          family=Inter:wght@400;500;600;700
+   Lato                     'Lato', system-ui, sans-serif                           family=Lato:wght@400;700
+   IBM Plex Sans            'IBM Plex Sans', system-ui, sans-serif                  family=IBM+Plex+Sans:wght@400;500;600;700
+   Helvetica Neue (system)  'Helvetica Neue', Helvetica, Arial, sans-serif          (none — remove the Google Fonts <link>)
+   Roboto
+   System UI
+   ================================================================ */
+:root {
+  --font-body: "System UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+a {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: var(--accent-red);
+  text-decoration: none;
+}
+
+body,
+td,
+th,
+tr,
+p,
+a {
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+strong {
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+h2 {
+  margin: 0;
+  font-weight: normal;
+  font-family: var(--font-body);
+  font-size: 22px;
+}
+
+.papertitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.name {
+  padding-top: 20px;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 32px;
+}
+
+.one {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+.two {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+}
+
+.fade {
+  transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+}
+
+span.highlight {
+  background-color: var(--light-highlight);
+}
+
+.colored-box {
+    color: var(--black);
+    padding: 20px;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+/* Dark theme styles */
+[data-theme="dark"] {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+[data-theme="dark"] a {
+  color: var(--primary-blue);
+}
+
+[data-theme="dark"] a:focus,
+[data-theme="dark"] a:hover {
+  color: var(--accent-red);
+}
+
+[data-theme="dark"] span.highlight {
+  background-color: var(--dark-highlight);
+}
+
+/* Project row styles */
+.project-row {
+  background-color: var(--light-secondary-bg);
+  color: var(--light-text);
+}
+
+.project-row td {
+  color: inherit;
+}
+
+[data-theme="dark"] .project-row {
+  background-color: var(--dark-secondary-bg);
+  color: var(--dark-text);
+}
+
+.project-thumb {
+  width: 160px;
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-thumb img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.project-thumb img.is-hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.project-thumb:hover img.is-hover {
+  opacity: 1;
+}
+
+.project-thumb:hover img.is-base {
+  opacity: 0;
+}
+
+/* Theme toggle button styles */
+.theme-toggle {
+  background: none;
+  position: fixed;
+  margin: 0;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  background-color: none;
+  box-shadow: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: background-color 0.3s ease;
+  color: inherit;
+}
+
+[data-theme="dark"] .theme-toggle {
+  background-color: none;
+  color: var(--white);
+}
+
+.theme-toggle:hover {
+  background-color: var(--transparent);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background-color: var(--transparent);
+}
+
+.theme-toggle:hover i.fa-moon {
+  color: var(--primary-blue);
+  transition: color 0.5s ease;
+}
+
+.theme-toggle:hover i.fa-sun {
+  color: var(--accent-red);
+  transition: color 0.5s ease;
+}
+
+/* Project Page Styles */
+.project {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.project-header {
+  margin-bottom: 2rem;
+}
+
+.project-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.project-subtitle {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  font-weight: normal;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.project-meta span {
+  background-color: var(--bg-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.project-image {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.project-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.project-content {
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.project-content h2 {
+  margin: 2rem 0 1rem;
+  color: var(--text-color);
+}
+
+.project-content ul, 
+.project-content ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.project-links {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.project-website {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+
+.project-website:hover {
+  opacity: 0.8;
+}
+
+/* Custom cursor (single blue dot, no easing) */
+.cursor-enabled,
+.cursor-enabled a,
+.cursor-enabled button {
+  cursor: none;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--primary-blue);
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  transform: translate3d(-50%, -50%, 0);
+  /* Only animate visual changes, never the position transform. */
+  transition: width 0.15s ease, height 0.15s ease, background-color 0.15s ease;
+}
+
+.cursor-dot.is-hover {
+  width: 18px;
+  height: 18px;
+  background-color: var(--accent-red);
+}
+
+/* Hide custom cursor on touch / coarse pointers */
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot {
+    display: none;
+  }
+  .cursor-enabled,
+  .cursor-enabled a,
+  .cursor-enabled button {
+    cursor: auto;
+  }
+}
+
+/* Side-projects section */
+.side-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.side-project {
+  display: block;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background-color: var(--light-secondary-bg);
+  color: var(--light-text);
+  text-decoration: none;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.side-project:hover {
+  transform: translateY(-2px);
+  background-color: var(--light-bg);
+  color: var(--primary-blue);
+}
+
+.side-project__title {
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0 0 4px 0;
+}
+
+.side-project__meta {
+  font-size: 12px;
+  color: inherit;
+  opacity: 0.75;
+  margin: 0;
+}
+
+[data-theme="dark"] .side-project {
+  background-color: var(--dark-secondary-bg);
+  color: var(--dark-text);
+}
+
+[data-theme="dark"] .side-project:hover {
+  background-color: var(--dark-highlight);
+  color: var(--primary-blue);
+}
+
+/* Project meta chips (shared) */
+.project-meta span {
+  display: inline-block;
+  padding: 4px 10px;
+  margin: 0 4px;
+  border-radius: 4px;
+  font-size: 13px;
+  background: var(--light-secondary-bg);
+  color: var(--light-text);
+}
+
+[data-theme="dark"] .project-meta span {
+  background: var(--dark-secondary-bg);
+  color: var(--dark-text);
+}
+
+.project-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-website {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--primary-blue);
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.project-website:hover {
+  background: var(--accent-red);
+  color: #fff;
+}
+
+/* Food Diaries — dynamic gallery */
+/* Break out of the default 800px page container so the grid can breathe. */
+.project:has(.foodiaries) {
+  max-width: 1180px;
+  padding: 1.5rem 1rem;
+}
+
+.foodiaries {
+  margin: 0 auto;
+}
+
+.foodiaries__intro {
+  margin-bottom: 24px;
+}
+
+.foodiaries__filters {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 18px;
+  background: var(--light-secondary-bg);
+  border-radius: 8px;
+}
+
+[data-theme="dark"] .foodiaries__filters {
+  background: var(--dark-secondary-bg);
+}
+
+.foodiaries__filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.foodiaries__label {
+  font-weight: 700;
+  font-size: 13px;
+  min-width: 70px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.foodiaries__chip {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--light-secondary-bg);
+  background: var(--light-bg);
+  color: var(--light-text);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.foodiaries__chip:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.foodiaries__chip.is-active {
+  background: var(--primary-blue);
+  color: #fff;
+  border-color: var(--primary-blue);
+}
+
+[data-theme="dark"] .foodiaries__chip {
+  background: var(--dark-bg);
+  color: var(--dark-text);
+  border-color: var(--dark-secondary-bg);
+}
+
+.foodiaries__chip-count {
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 400;
+  color: #888;
+  font-variant-numeric: tabular-nums;
+}
+
+.foodiaries__chip.is-active .foodiaries__chip-count {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+[data-theme="dark"] .foodiaries__chip-count {
+  color: #888;
+}
+
+.foodiaries__year-range {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 260px;
+}
+
+/* Dual-thumb range slider.
+   Two range inputs are overlaid on the same track. The :before bar shows
+   the full track; --range-start and --range-end (set from JS) tint the
+   selected segment. pointer-events on the inputs are tuned so both thumbs
+   stay grabbable even when overlapping. */
+.foodiaries__dual-range {
+  position: relative;
+  flex: 1;
+  height: 28px;
+  --range-start: 0%;
+  --range-end: 100%;
+}
+
+.foodiaries__dual-range::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--light-secondary-bg);
+  border-radius: 2px;
+  transform: translateY(-50%);
+}
+
+.foodiaries__dual-range::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: 4px;
+  background: var(--primary-blue);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  left: var(--range-start);
+  right: calc(100% - var(--range-end));
+}
+
+[data-theme="dark"] .foodiaries__dual-range::before {
+  background: var(--dark-bg);
+}
+
+.foodiaries__dual-range input[type="range"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  appearance: none;
+  pointer-events: none;
+  margin: 0;
+}
+
+.foodiaries__dual-range input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--primary-blue);
+  cursor: pointer;
+  pointer-events: auto;
+  margin-top: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.foodiaries__dual-range input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--primary-blue);
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.foodiaries__dual-range input[type="range"]::-webkit-slider-runnable-track {
+  background: transparent;
+}
+
+.foodiaries__year-display {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  min-width: 110px;
+  text-align: right;
+}
+
+.foodiaries__count {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 14px;
+}
+
+.foodiaries__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.foodiaries__card {
+  background: var(--light-bg);
+  border: 1px solid var(--light-secondary-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  /* Card is an <a>, but the inner text should read as body text, not link blue. */
+  color: var(--light-text);
+  text-decoration: none;
+}
+
+.foodiaries__card:hover {
+  border-color: var(--primary-blue);
+  transform: translateY(-2px);
+  color: var(--light-text);
+}
+
+[data-theme="dark"] .foodiaries__card,
+[data-theme="dark"] .foodiaries__card:hover {
+  background: var(--dark-secondary-bg);
+  border-color: var(--dark-secondary-bg);
+  color: var(--dark-text);
+}
+
+[data-theme="dark"] .foodiaries__card:hover {
+  border-color: var(--primary-blue);
+}
+
+.foodiaries__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--light-secondary-bg);
+  overflow: hidden;
+}
+
+.foodiaries__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Carousel arrows — visible only on hover, large touch target on mobile. */
+.foodiaries__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.15s ease, background 0.15s ease;
+  z-index: 2;
+}
+
+.foodiaries__nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.foodiaries__nav--prev { left: 6px; }
+.foodiaries__nav--next { right: 6px; }
+
+.foodiaries__card-wrap:hover .foodiaries__nav {
+  opacity: 1;
+}
+
+@media (hover: none), (pointer: coarse) {
+  /* On touch devices, always show the arrows. */
+  .foodiaries__nav { opacity: 1; width: 30px; height: 30px; font-size: 22px; }
+}
+
+.foodiaries__counter {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 10px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.foodiaries__card-wrap:hover .foodiaries__counter {
+  opacity: 1;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .foodiaries__counter { opacity: 1; }
+}
+
+/* Search input */
+.foodiaries__search {
+  flex: 1;
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--light-secondary-bg);
+  background: var(--light-bg);
+  color: var(--light-text);
+  min-width: 220px;
+}
+
+.foodiaries__search:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+}
+
+[data-theme="dark"] .foodiaries__search {
+  background: var(--dark-bg);
+  color: var(--dark-text);
+  border-color: var(--dark-secondary-bg);
+}
+
+.foodiaries__body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.foodiaries__caption {
+  font-size: 12px;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.foodiaries__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.foodiaries__pill {
+  background: var(--light-secondary-bg);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+[data-theme="dark"] .foodiaries__pill {
+  background: var(--dark-bg);
+}
+
+.foodiaries__empty {
+  padding: 40px 20px;
+  text-align: center;
+  border: 1px dashed var(--light-secondary-bg);
+  border-radius: 8px;
+  opacity: 0.7;
+}
+
+/* Thinking — writings index */
+.writing-index {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.writing-index__item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--light-secondary-bg);
+}
+
+[data-theme="dark"] .writing-index__item {
+  border-bottom-color: var(--dark-secondary-bg);
+}
+
+.writing-index__link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.writing-index__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+.writing-index__link:hover .writing-index__title {
+  color: var(--accent-red);
+  text-decoration: underline;
+}
+
+.writing-index__date {
+  font-size: 12px;
+  opacity: 0.6;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.writing-index__excerpt {
+  margin: 6px 0 0;
+  font-size: 13px;
+  opacity: 0.75;
+  line-height: 1.4;
+}
+
+/* Thinking — single writing */
+.writing {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+.writing-header {
+  margin-bottom: 32px;
+}
+
+.writing-meta {
+  font-size: 13px;
+  opacity: 0.7;
+  margin: 0 0 12px;
+}
+
+.writing-title {
+  font-size: 28px;
+  line-height: 1.3;
+  margin: 0 0 8px;
+}
+
+.writing-subtitle {
+  font-size: 16px;
+  font-style: italic;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.writing-content {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.writing-content p {
+  margin: 0 0 1.1em;
+}
+
+.writing-content blockquote {
+  margin: 1.4em 0;
+  padding: 4px 18px;
+  border-left: 3px solid var(--primary-blue);
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.writing-content h2,
+.writing-content h3 {
+  margin: 1.8em 0 0.5em;
+  font-weight: 700;
+}
+
+.writing-content h2 { font-size: 20px; }
+.writing-content h3 { font-size: 17px; }
+
+.writing-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.6em auto;
+  border-radius: 6px;
+}
+
+.writing-source {
+  font-size: 13px;
+  margin: 0 0 18px;
+  padding: 8px 14px;
+  border-left: 3px solid var(--primary-blue);
+  background: var(--light-secondary-bg);
+  border-radius: 0 4px 4px 0;
+}
+
+[data-theme="dark"] .writing-source {
+  background: var(--dark-secondary-bg);
+}
+
+.writing-source a {
+  color: var(--primary-blue);
+}
+
+.writing-source a:hover {
+  color: var(--accent-red);
+}
+
+/* Caption popup — a real tooltip bubble sitting BELOW the card so it can
+   extend beyond the card width and isn't clipped by the square thumbnail. */
+.foodiaries__card-wrap {
+  position: relative;  /* anchor for the absolutely-positioned popup */
+}
+
+.foodiaries__overlay {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  width: 380px;
+  max-width: min(380px, calc(100vw - 32px));
+  background: rgba(0, 0, 0, 0.92);
+  color: #fff;
+  padding: 14px 16px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  /* Cap height so a 2200-char caption doesn't fill the screen, but most
+     real captions (~900-1200 chars) fit without scrolling. */
+  max-height: min(560px, 75vh);
+  overflow-y: auto;
+  white-space: pre-wrap;   /* preserve line breaks the user wrote */
+}
+
+/* Speech-bubble triangle pointing up to the card */
+.foodiaries__overlay::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.92);
+}
+
+.foodiaries__overlay p { margin: 0; }
+
+.foodiaries__card-wrap:hover .foodiaries__overlay {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .foodiaries__card-wrap:focus-within .foodiaries__overlay {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Posting density heatmap (rows = years, cols = months) */
+.foodiaries__heatmap {
+  margin: 0 0 22px;
+  padding: 14px 16px;
+  background: var(--light-secondary-bg);
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+[data-theme="dark"] .foodiaries__heatmap {
+  background: var(--dark-secondary-bg);
+}
+
+.foodiaries__heatmap-loading {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.foodiaries__hm-grid {
+  display: grid;
+  grid-template-columns: 44px repeat(12, 1fr);
+  grid-auto-rows: 22px;
+  gap: 4px;
+  min-width: 540px;
+}
+
+.foodiaries__hm-month-label,
+.foodiaries__hm-year-label {
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  opacity: 0.65;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.foodiaries__hm-year-label {
+  justify-content: flex-end;
+  padding-right: 6px;
+  font-weight: 600;
+}
+
+.foodiaries__hm-cell {
+  border: 0;
+  padding: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: outline 0.1s ease, transform 0.1s ease;
+}
+
+.foodiaries__hm-cell:hover {
+  transform: scale(1.15);
+  outline: 1px solid var(--primary-blue);
+}
+
+.foodiaries__hm-cell.is-selected {
+  outline: 2px solid var(--primary-blue);
+  transform: scale(1.15);
+}
+
+/* Intensity scale: 0 = empty, 1-4 = increasing blue. */
+/* Intensity scale: 0 = empty, 1-4 = increasing red (matches --accent-red #D60311). */
+.foodiaries__hm-cell[data-level="0"] { background: rgba(214, 3, 17, 0.07); }
+.foodiaries__hm-cell[data-level="1"] { background: rgba(214, 3, 17, 0.25); }
+.foodiaries__hm-cell[data-level="2"] { background: rgba(214, 3, 17, 0.50); }
+.foodiaries__hm-cell[data-level="3"] { background: rgba(214, 3, 17, 0.78); }
+.foodiaries__hm-cell[data-level="4"] { background: rgba(214, 3, 17, 1); }
+
+[data-theme="dark"] .foodiaries__hm-cell[data-level="0"] {
+  background: rgba(255, 255, 255, 0.05);
+}

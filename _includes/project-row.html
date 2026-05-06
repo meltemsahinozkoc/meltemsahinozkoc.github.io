@@ -1,0 +1,37 @@
+{%- comment -%}
+Renders one project row.
+Inputs (passed via include params):
+  title         project title (plain text, not linked)
+  cover         path to base cover image (relative to site root, no leading slash)
+  cover_hover   optional hover image
+  byline_html   raw HTML for the byline line (course/degree/venue)
+  description   short description paragraph
+  links         optional pipe-separated list of "label::href" pairs (e.g. "video::https://...")
+{%- endcomment -%}
+<tr class="project-row">
+  <td style="padding:16px;width:20%;vertical-align:middle">
+    <div class="project-thumb">
+      <img class="is-base" src="{{ include.cover | relative_url }}" alt="{{ include.title }} cover" width="160">
+      {%- if include.cover_hover -%}
+      <img class="is-hover" src="{{ include.cover_hover | relative_url }}" alt="{{ include.title }} animated preview" width="160">
+      {%- endif -%}
+    </div>
+  </td>
+  <td style="padding:8px;width:80%;vertical-align:middle">
+    <span class="papertitle">{{ include.title }}</span>
+    <br>
+    {{ include.byline_html }}
+    {%- if include.links and include.links != '' -%}
+      <br>
+      {%- assign pairs = include.links | split: '|' -%}
+      {%- for pair in pairs -%}
+        {%- assign parts = pair | split: '::' -%}
+        {%- assign href = parts[1] -%}
+        {%- assign external = false -%}
+        {%- if href contains '://' -%}{%- assign external = true -%}{%- endif -%}
+        <a href="{{ href }}"{% if external %} target="_blank" rel="noopener"{% endif %}>{{ parts[0] }}</a>{%- unless forloop.last %} / {% endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
+    <p>{{ include.description }}</p>
+  </td>
+</tr>

@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+<article class="writing">
+  <header class="writing-header">
+    <p class="writing-meta">
+      <a href="{{ '/thinking/' | relative_url }}">← All writings</a>
+      {% if page.date %}
+        <span class="writing-date"> · {{ page.date | date: "%B %-d, %Y" }}</span>
+      {% endif %}
+    </p>
+    <h1 class="writing-title">{{ page.title }}</h1>
+    {% if page.subtitle %}
+      <p class="writing-subtitle">{{ page.subtitle }}</p>
+    {% endif %}
+  </header>
+
+  {% if page.source_url %}
+  <p class="writing-source">
+    Originally posted on
+    <a href="{{ page.source_url }}" target="_blank" rel="noopener">{{ page.source_label | default: page.source_url }}</a>.
+  </p>
+  {% endif %}
+
+  {% if page.hero %}
+  <img src="{{ page.hero | relative_url }}" alt="{{ page.title }}" class="writing-hero">
+  {% endif %}
+
+  <div class="writing-content">
+    {{ content }}
+  </div>
+
+  <p style="text-align:center; margin: 60px 0 20px;">
+    <a href="{{ '/thinking/' | relative_url }}" style="color: var(--primary-blue); text-decoration: none;">← Back to all writings</a>
+  </p>
+</article>
