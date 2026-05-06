@@ -6,54 +6,43 @@
     <meta name="author" content="{{ site.name }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{ '/images/favicon/favicon.ico' | relative_url }}" type="image/x-icon">
+    <!-- Body font is the Apple system stack — no external font load needed.
+         If you switch --font-body in main.css to a Google Font, re-add the
+         preconnect + stylesheet links here. -->
+    <!--
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    -->
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
 
-  <body>
+  <body class="{% if page.permalink contains '/foodiaries/' %}page-wide{% endif %}">
     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light theme">
       <i class="fas fa-moon"></i>
     </button>
 
-    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-      <tbody>
-        <tr style="padding:0px">
-          <td style="padding:0px">
+    <div class="page-container">
 
-            <!-- Navigation -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr style="padding:0px">
-                  <td style="padding:2.5%;width:100%;vertical-align:middle">
-                    <p style="text-align:center">
-                      <a href="{{ '/' | relative_url }}">Home</a> &nbsp;/&nbsp;
-                      <a href="{{ '/#projects' | relative_url }}">Projects</a> &nbsp;/&nbsp;
-                      <a href="{{ '/#side-projects' | relative_url }}">Side projects</a> &nbsp;/&nbsp;
-                      <a href="mailto:{{ site.footer-links.email }}">Contact</a>
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+      <nav class="page-nav">
+        <a href="{{ '/' | relative_url }}">Home</a> &nbsp;/&nbsp;
+        <a href="{{ '/#projects' | relative_url }}">Projects</a> &nbsp;/&nbsp;
+        <a href="{{ '/#side-projects' | relative_url }}">Side projects</a> &nbsp;/&nbsp;
+        <a href="mailto:{{ site.footer-links.email }}">Contact</a>
+      </nav>
 
-            <!-- Main Content -->
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-              <tbody>
-                <tr>
-                  <td style="padding:16px;width:100%;vertical-align:middle">
-                    {{ content }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+      <main class="page-main">
+        {{ content }}
+      </main>
 
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    </div>
+
+    <footer class="page-footer">
+      Built with <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a>
+      on <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>.
+      <a href="https://github.com/meltemsahinozkoc/meltemsahinozkoc.github.io" target="_blank" rel="noopener">Source</a>.
+    </footer>
 
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
   </body>
