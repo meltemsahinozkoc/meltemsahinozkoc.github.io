@@ -9,4 +9,10 @@ cd "$(dirname "$0")"
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-bundle exec jekyll serve --livereload "$@"
+# Skip Bundler / Gemfile resolution — the system Ruby has jekyll 4.3.4
+# installed directly, and the Gemfile.lock pins gems that need Ruby 3.1+
+# (nokogiri 1.18). We don't need github-pages locally; GitHub Pages builds
+# server-side on push. To restore the bundled flow, install Ruby 3.1+ via
+# rbenv and run `bundle install`, then revert this line.
+export JEKYLL_NO_BUNDLER_REQUIRE=true
+exec jekyll serve --livereload "$@"

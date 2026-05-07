@@ -2,7 +2,7 @@
 
 Personal portfolio of Meltem Sahin Ozkoc — built with Jekyll, hosted on GitHub Pages.
 
-## Local development
+## Local dev
 
 ```sh
 bundle install      # one-time

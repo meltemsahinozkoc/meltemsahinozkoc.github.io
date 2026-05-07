@@ -1,0 +1,48 @@
+---
+layout: default
+title: Dashboard
+permalink: /dashboard/
+---
+
+{% assign total_words = 0 %}
+{% for w in site.writings %}
+  {% assign w_count = w.content | number_of_words %}
+  {% assign total_words = total_words | plus: w_count %}
+{% endfor %}
+
+<section class="dashboard">
+
+  <header class="dashboard__header">
+    <h1 class="dashboard__title">Dashboard</h1>
+    <p class="dashboard__lede">Computed at build time (Last built: {{ site.time | date: "%b %d, %Y" }})</p>
+  </header>
+
+  <h2 class="dashboard__section-heading">Content</h2>
+  <div class="dashboard__grid">
+    <article class="stat">
+      <p class="stat__value">{{ site.writings | size }}</p>
+      <p class="stat__label">Essays</p>
+    </article>
+    <article class="stat">
+      <p class="stat__value">{{ total_words }}</p>
+      <p class="stat__label">Words written</p>
+    </article>
+    <article class="stat">
+      <p class="stat__value">4</p>
+      <p class="stat__label">Projects</p>
+    </article>
+    <article class="stat">
+      <p class="stat__value">5</p>
+      <p class="stat__label">Side projects</p>
+    </article>
+  </div>
+
+  <h2 class="dashboard__section-heading">Visitors</h2>
+  <div class="dashboard__map" aria-label="Visitor map">
+    <script type="text/javascript" id="clustrmaps" src="https://clustrmaps.com/map_v2.js?cl=080808&w=a&t=tt&d=vwpxcF0bS4CJsQBrYgVCFtRukOKI00iBXCoRMtfmxvE&co=ffffff&ct=808080&cmo=3acc3a&cmn=ff5353"></script>
+    <a class="dashboard__map-link" href="https://clustrmaps.com/site/1c6no" target="_blank" rel="noopener">Open the full live tracker →</a>
+  </div>
+
+  <p style="text-align: center;"><a href="https://clarity.microsoft.com/projects/view/wnfandnyhd/dashboard" target="_blank" rel="noopener">Internal dashboard</a></p>
+
+</section>

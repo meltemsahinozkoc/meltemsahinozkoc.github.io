@@ -6,16 +6,12 @@
     <meta name="author" content="{{ site.name }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{ '/images/favicon/favicon.ico' | relative_url }}" type="image/x-icon">
-    <!-- Body font is the Apple system stack — no external font load needed.
-         If you switch --font-body in main.css to a Google Font, re-add the
-         preconnect + stylesheet links here. -->
-    <!--
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% include clarity.html %}
   </head>
 
   <body class="{% if page.permalink contains '/foodiaries/' or page.permalink contains '/places/' %}page-wide{% endif %}{% if page.permalink contains '/places/' %} page-places{% endif %}{% if page.permalink contains '/music/' %} page-music{% endif %}">

@@ -12,16 +12,12 @@ permalink: /
     <meta name="author" content="Meltem Sahin Ozkoc">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{ '/images/favicon/favicon.ico' | relative_url }}" type="image/x-icon">
-    <!-- Body font is the Apple system stack — no external font load needed.
-         If you switch --font-body in main.css to a Google Font, re-add the
-         preconnect + stylesheet links here. -->
-    <!--
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-    -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% include clarity.html %}
   </head>
 
   <body>
@@ -143,7 +139,7 @@ permalink: /
 
             {% include project-row.html
                 title="#IAMINARCHITECTURE"
-                cover="/images/projects/iaminarchitecture/cover.svg"
+                cover="/images/projects/iaminarchitecture/01.png"
                 byline_html="<em>Architectural Design Thinking</em>, TUM Venture Lab"
                 links="instagram::https://www.instagram.com/iaminarchitecture/"
                 description="A platform concept addressing the communication and retention gap in the AEC industry, combining forums, job boards, firm reviews, and learning resources so practitioners and students can share knowledge across studios."
@@ -156,11 +152,8 @@ permalink: /
 
     <footer class="page-footer">
       Built with <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a>.
-      © 2026 Meltem Sahin Ozkoc
-      <div class="page-footer__map" aria-label="Visitor map">
-        <script type="text/javascript" id="clustrmaps" src="https://clustrmaps.com/map_v2.js?cl=080808&w=a&t=n&d=vwpxcF0bS4CJsQBrYgVCFtRukOKI00iBXCoRMtfmxvE&co=ffffff&ct=808080&cmo=3acc3a&cmn=ff5353"></script>
-        <a class="page-footer__map-link" href="https://clustrmaps.com/site/1c6no" target="_blank" rel="noopener" aria-label="View full visitor map on Clustrmaps"></a>
-      </div>
+      © 2026 Meltem Sahin Ozkoc &nbsp;·&nbsp;
+      <a href="{{ '/dashboard/' | relative_url }}">Dashboard</a>
     </footer>
 
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
