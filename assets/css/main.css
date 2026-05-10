@@ -55,6 +55,12 @@
   --duration-slow: 420ms;
 }
 
+html {
+  scroll-behavior: smooth;
+  /* Anchor jumps land below the sticky site header. */
+  scroll-padding-top: 64px;
+}
+
 a {
   color: var(--primary-blue);
   text-decoration: none;
@@ -1751,6 +1757,87 @@ body.page-places .project-header {
 
 [data-theme="dark"] .page-footer { color: #6e6e6e; }
 [data-theme="dark"] .page-footer a:hover { color: var(--accent-red); border-bottom-color: var(--accent-red); }
+
+/* ================================================================
+   Site header — sticky banner with primary nav. Appears on every page
+   via _includes/site-header.html (wired into index.html and the
+   default layout). The fixed top-right theme toggle and top-left
+   history nav have z-index 50, which keeps them above the header.
+   ================================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  width: 100%;
+  background: rgba(240, 238, 230, 0.78);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .site-header {
+  background: rgba(26, 26, 26, 0.78);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.site-header__nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 80px;          /* leave room for the fixed top-corner buttons */
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.site-header__link {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: inherit;
+  position: relative;
+  padding: 4px 2px;
+}
+
+.site-header__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--primary-blue);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--duration-base) var(--ease-out-cubic);
+}
+
+.site-header__link:hover {
+  color: var(--primary-blue);
+}
+
+.site-header__link:hover::after {
+  transform: scaleX(1);
+}
+
+[data-theme="dark"] .site-header__link:hover {
+  color: var(--accent-red);
+}
+
+[data-theme="dark"] .site-header__link::after {
+  background: var(--accent-red);
+}
+
+@media (max-width: 600px) {
+  .site-header__nav {
+    padding: 10px 64px;
+    gap: 18px;
+  }
+  .site-header__link {
+    font-size: 14px;
+  }
+}
 
 /* ================================================================
    Page-level layout containers.

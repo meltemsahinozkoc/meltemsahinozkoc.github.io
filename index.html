@@ -21,12 +21,14 @@ permalink: /
   </head>
 
   <body>
+    {% include site-header.html %}
+
     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light theme">
       <i class="fas fa-moon"></i>
     </button>
 
-    
-    
+
+
     <!-- Hero / about — full-bleed-ish, max ~1200px -->
     <section class="hero-band">
       <hr class="section-divider" aria-hidden="true">
@@ -78,14 +80,6 @@ permalink: /
         <a class="side-project" href="{{ '/projects/foodiaries/' | relative_url }}">
           <p class="side-project__title">@oncekahvem</p>
           <p class="side-project__meta">Notes on coffee &amp; food</p>
-        </a>
-        <a class="side-project" href="{{ '/thinking/' | relative_url }}">
-          <p class="side-project__title">Thinking</p>
-          <p class="side-project__meta">Essays on anything</p>
-        </a>
-        <a class="side-project" href="{{ '/projects/music/' | relative_url }}">
-          <p class="side-project__title">Music</p>
-          <p class="side-project__meta">Selected covers</p>
         </a>
         <a class="side-project" href="{{ '/projects/odtudeyemek/' | relative_url }}">
           <p class="side-project__title">@odtudeyemek</p>
