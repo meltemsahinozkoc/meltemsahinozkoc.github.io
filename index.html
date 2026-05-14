@@ -98,11 +98,31 @@ permalink: /
       <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;"><tbody>
         <tr>
           <td style="padding:16px 0;width:100%;vertical-align:middle">
-            <h2 id="projects">Projects</h2>
+            <h2 id="projects">Projects (under construction)</h2>
             <p>Works that span architecture, energy, and technology in the built environment.</p>
           </td>
         </tr>
       </tbody></table>
+
+      <div class="project-filter" data-project-filter aria-label="Filter projects">
+        <div class="project-filter__tags">
+          <button type="button" class="project-filter__chip" data-filter-tag="all">All<span class="project-filter__chip-count" data-count="all"></span></button>
+          <button type="button" class="project-filter__chip project-filter__chip--featured is-active" data-filter-tag="featured">Selected<span class="project-filter__chip-count" data-count="featured"></span></button>
+          <button type="button" class="project-filter__chip project-filter__chip--computer-vision" data-filter-tag="computer-vision">Computer Vision<span class="project-filter__chip-count" data-count="computer-vision"></span></button>
+          <button type="button" class="project-filter__chip project-filter__chip--machine-learning" data-filter-tag="machine-learning">Machine Learning<span class="project-filter__chip-count" data-count="machine-learning"></span></button>
+          <button type="button" class="project-filter__chip project-filter__chip--buildings-energy" data-filter-tag="buildings-energy">Buildings &amp; Energy<span class="project-filter__chip-count" data-count="buildings-energy"></span></button>
+          <button type="button" class="project-filter__chip project-filter__chip--software-development" data-filter-tag="software-development">Software Development<span class="project-filter__chip-count" data-count="software-development"></span></button>
+          <button type="button" class="project-filter__chip project-filter__chip--architecture-design" data-filter-tag="architecture-design">Architecture &amp; Design<span class="project-filter__chip-count" data-count="architecture-design"></span></button>
+        </div>
+        <div class="project-filter__year" aria-label="Year range">
+          <span class="project-filter__year-label">Year</span>
+          <div class="project-filter__dual-range" data-dual-range>
+            <input type="range" data-year-min aria-label="Minimum year">
+            <input type="range" data-year-max aria-label="Maximum year">
+          </div>
+          <span class="project-filter__year-display" data-year-display></span>
+        </div>
+      </div>
 
       <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;"><tbody>
 
@@ -112,21 +132,30 @@ permalink: /
                 cover_hover="/images/projects/blue-print-green-design/cover.gif"
                 byline_html="<em>Essential MVC Programming</em>, CMU"
                 links="video::https://www.youtube.com/watch?v=JZKJyPyYDbk"
+                tags="software-development,buildings-energy"
+                year="2024"
+                featured="true"
                 description="BLUEPRINT GREEN DESIGN is an interactive, free, and lightweight app for anyone who wants to create and visualize simple building plans in 2D, calculate and visualize their heat loss, and get energy analysis for each component to make informed efficiency decisions."
             %}
 
             {% include project-row.html
                 title="Residential Energy Retrofit"
                 cover="/images/projects/enviro1/enviro.jpg"
-                byline_html="<em>Environmental Systems & Climate</em> - CMU, Fall 2024"
+                byline_html="<em>Environmental Systems & Climate</em> - CMU"
+                tags="buildings-energy"
+                year="2024 Fall"
+                featured="true"
                 description="A net-zero retrofit study for a single-family home in Puchheim, Bavaria. Combines envelope-driven heat-loss modeling, passive conditioning strategies, and RemRATE simulation to chart a staged path toward net-zero annual energy."
             %}
 
             {% include project-row.html
                 title="ASHRAE Great Energy Predictor III"
                 cover="/images/projects/ashrae-great-energy-predictor/ashrae.jpg"
-                byline_html="<em>Applied Machine Learning</em> - CMU, Spring 2025"
+                byline_html="<em>Applied Machine Learning</em> - CMU"
                 links="github::https://github.com/meltemsahinozkoc/ashrae-energy-prediction|kaggle::https://www.kaggle.com/competitions/ashrae-energy-prediction/overview"
+                tags="machine-learning,buildings-energy"
+                year="2025 Spring"
+                featured="true"
                 description="Hourly building energy-use forecasting on the ASHRAE Great Energy Predictor III dataset. Engineered temporal, lag, and weather features and trained gradient-boosted models evaluated by RMSLE."
             %}
 
@@ -135,7 +164,177 @@ permalink: /
                 cover="/images/projects/iaminarchitecture/01.png"
                 byline_html="<em>Architectural Design Thinking</em>, TUM Venture Lab"
                 links="instagram::https://www.instagram.com/iaminarchitecture/"
+                tags="software-development,architecture-design"
+                year="2024"
                 description="A platform concept addressing the communication and retention gap in the AEC industry, combining forums, job boards, firm reviews, and learning resources so practitioners and students can share knowledge across studios."
+            %}
+
+            {% include project-row.html
+                title="From Pixels to People (pix2ppl)"
+                cover="/images/projects/pix2ppl/01.jpg"
+                byline_html="<em>M.Sc. Thesis</em>, Building Performance & Diagnostics, CMU"
+                tags="computer-vision,machine-learning,buildings-energy"
+                year="2026 Spring"
+                featured="true"
+                description="An explainable multimodal screening framework that infers building attributes from drone roof imagery, Google Street View facades, and electricity time-series, generating retrofit action rankings for the Larimer neighborhood in Pittsburgh."
+            %}
+
+            {% include project-row.html
+                title="3S MERIDIAN"
+                cover="/images/projects/gs-hackathon/01.jpg"
+                byline_html="<em>CMU CEE × Gresham Smith Hackathon</em>"
+                tags="software-development,buildings-energy"
+                year="2026 Spring"
+                featured="true"
+                description="A transparent, multi-factor site-selection tool that scores all 3,234 US counties for data-center feasibility across 11 infrastructure, sustainability, and economic criteria. A Streamlit interface lets users set hard feasibility thresholds and soft sustainability weights, then explore the results on an interactive choropleth map overlaid with power plants and natural-gas pipelines."
+            %}
+
+            {% include project-row.html
+                title="Shaping Daylight"
+                cover="/images/projects/daylight/01.jpg"
+                byline_html="<em>Building Performance Modeling</em>, CMU"
+                tags="buildings-energy,architecture-design"
+                year="2025 Fall"
+                description="Parametric daylight studies for an underground civic space in Boston using Grasshopper and Climate Studio. Sun-path diagrams, solar radiation mapping, and UTCI comfort overlays drive form-finding."
+            %}
+
+            {% include project-row.html
+                title="Deep Learning Facade Classification"
+                cover="/images/projects/dl-facade-classification/01.jpg"
+                byline_html="<em>Applied Deep Learning</em>, CMU"
+                links="github::https://github.com/meltemsahinozkoc/deep-learning-facade-classification"
+                tags="computer-vision,machine-learning"
+                year="2025 Spring"
+                description="Transfer-learning classification of building exterior cladding materials from street-view façade imagery. Pre-trained ResNet50 and InceptionV3 backbones with frozen weights and a Dense / Dropout / Softmax head, trained on Wang et al. (2024)'s London subset and tested for geographic generalization on the Scotland subset."
+            %}
+
+            {% include project-row.html
+                title="Environmental Performance Simulation"
+                cover="/images/projects/eps/01.jpg"
+                byline_html="<em>Environmental Performance Simulation</em>, CMU"
+                tags="buildings-energy,architecture-design"
+                year="2025 Fall"
+                description="Climate-aware daylight and lighting simulation workflows for an underground civic space in Boston (ASHRAE 5A). Builds a reusable Grasshopper + Climate Studio template that ties wind-rose, humidity, and dry-bulb temperature analyses to sDA / UDI metrics and a Rhino + Enscape VR walkthrough."
+            %}
+
+            {% include project-row.html
+                title="LiDAR Point Cloud → LOD2 Roof Models"
+                cover="/images/projects/lidar-lod2/01.jpg"
+                byline_html="<em>Larimer Energy Retrofit Research</em>, CMU Center for Building Performance"
+                tags="computer-vision,buildings-energy"
+                year="2025 Spring"
+                featured="true"
+                description="3D urban building energy modeling from LiDAR point clouds in ArcGIS. Solar roof analysis via the Google Solar API, NREL PVWatts, and ArcGIS raster radiation tools to support retrofit and community-solar planning in Pittsburgh."
+            %}
+
+            {% include project-row.html
+                title="Larimer Energy Retrofit Dashboard"
+                cover="/images/projects/powerbi-dashboard/01.jpg"
+                byline_html="<em>Larimer Energy Retrofit Research</em>, CMU Center for Building Performance"
+                tags="buildings-energy"
+                year="2025 Spring"
+                description="Interactive Power BI dashboard for the Larimer neighborhood — geo-referenced energy consumption, retrofit-screening signals, and community-solar siting layered with ArcGIS-derived geometry."
+            %}
+
+            {% include project-row.html
+                title="Snow Melt Detection"
+                cover="/images/projects/snow-melt-detection/01.jpg"
+                byline_html="<em>Building Performance Modeling</em>, CMU"
+                tags="computer-vision,buildings-energy"
+                year="2025 Spring"
+                featured="true"
+                description="Coursework exploring snow and thermal dynamics within building performance modeling."
+            %}
+
+            {% include project-row.html
+                title="MIT Hackathon"
+                cover="/images/projects/mit-hackathon/01.jpg"
+                byline_html="<em>Hackathon</em>, MIT"
+                tags="software-development,buildings-energy"
+                year="2025"
+                description="A weekend-scale climate / energy hackathon entry."
+            %}
+
+            {% include project-row.html
+                title="Climate Studio Analysis"
+                cover="/images/projects/sg-climate_studio/01.jpg"
+                byline_html="<em>Summer Internship</em>"
+                tags="buildings-energy"
+                year="2025 Summer"
+                description="Thermal and daylight performance analysis using Climate Studio."
+            %}
+
+            {% include project-row.html
+                title="Parametric Design with Colibri"
+                cover="/images/projects/sg-colibri/01.jpg"
+                byline_html="<em>Summer Internship</em>"
+                tags="architecture-design,buildings-energy"
+                year="2025 Summer"
+                description="Parametric envelope and structural exploration using Grasshopper and Colibri."
+            %}
+
+            {% include project-row.html
+                title="IESVE Energy Modeling"
+                cover="/images/projects/sg-iesve/01.jpg"
+                byline_html="<em>Summer Internship</em>"
+                tags="buildings-energy"
+                year="2025 Summer"
+                description="Whole-building energy modeling using IES Virtual Environment."
+            %}
+
+            {% include project-row.html
+                title="Smart Greenhouse Management Using IoT"
+                cover="/images/projects/tum-iot_garden/01.jpg"
+                byline_html="<em>TUM Venture Labs</em>"
+                tags="software-development,buildings-energy"
+                year="2024"
+                description="Sensor-network and automated climate-control prototype for a sustainable greenhouse — exploring IoT geo-sensors for managed, low-input cultivation."
+            %}
+
+            {% include project-row.html
+                title="BI-T-OWER"
+                cover="/images/projects/bitower+daylight/01.jpg"
+                byline_html="<em>B.Arch. Graduation Project</em>, METU"
+                links="website::https://www.meltemsahin.rocks/bitower"
+                tags="architecture-design,buildings-energy"
+                year="2023 Spring"
+                description="A speculative data-center–civic-space hybrid with an underground public amphitheater. Parametric daylight design in Grasshopper and Climate Studio paired with VR walkthroughs and glare overlays."
+            %}
+
+            {% include project-row.html
+                title="whynot?"
+                cover="/images/projects/whynot/01.jpg"
+                byline_html="<em>Architectural Design</em>, METU"
+                tags="architecture-design"
+                year="2023"
+                description="A student co-housing studio project exploring shared residential living."
+            %}
+
+            {% include project-row.html
+                title="enCOunters"
+                cover="/images/projects/encounters/01.jpg"
+                byline_html="<em>Architectural Design II</em>, METU"
+                tags="architecture-design"
+                year="2022 Spring"
+                description="A music school along Istanbul's Dolmabahçe waterfront. Integrates historical fragments and preserves green corridors with concert halls, dance halls, and rehearsal spaces opening onto a public conservatory campus."
+            %}
+
+            {% include project-row.html
+                title="Building Detail Modeling — Jam House"
+                cover="/images/projects/detail-modeling/01.jpg"
+                byline_html="<em>Architectural Design</em>, METU"
+                tags="architecture-design"
+                year="2022"
+                description="Detailed construction documentation for a weekend house on Büyükada — REVIT 3D modeling, foundation/wall/floor connections, mezzanine acoustic design, and timber stud framing."
+            %}
+
+            {% include project-row.html
+                title="RESET — Interdisciplinary Smart-Home"
+                cover="/images/projects/reset/01.jpg"
+                byline_html="<em>METU Design Factory × Arçelik Global</em>"
+                tags="architecture-design,buildings-energy"
+                year="2022 Spring"
+                description="A home-empathizer concept that learns occupant patterns to optimize energy and comfort while prioritizing privacy. Built by a six-person interdisciplinary team (architecture, mechanical, electrical, business, industrial design)."
             %}
 
       </tbody></table>

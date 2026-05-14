@@ -25,6 +25,11 @@ __pycache__/
 # Internal notes
 .msahinoz/
 
+# Project staging folder — PDFs and inbound project folders live here
+# locally; they get processed by the /add-projects skill and the folders
+# get moved into images/projects/. Never push to GitHub.
+_projects-to-add/
+
 # Secrets
 .env
 .env.*

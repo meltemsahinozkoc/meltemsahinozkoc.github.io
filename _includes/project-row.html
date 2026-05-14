@@ -7,8 +7,13 @@ Inputs (passed via include params):
   byline_html   raw HTML for the byline line (course/degree/venue)
   description   short description paragraph
   links         optional pipe-separated list of "label::href" pairs (e.g. "video::https://...")
+  tags          optional comma-separated tag slugs. Valid slugs:
+                  computer-vision, machine-learning, buildings-energy,
+                  software-development, architecture-design
+                Rendered as color-coded pills in the top-right of the row and
+                used by the tag filter (data-tags on the <tr>).
 {%- endcomment -%}
-<tr class="project-row">
+<tr class="project-row"{% if include.tags %} data-tags="{{ include.tags }}"{% endif %}{% if include.year %} data-year="{{ include.year }}"{% endif %}{% if include.featured %} data-featured="true"{% endif %}>
   <td style="padding:16px;width:20%;vertical-align:middle">
     <div class="project-thumb">
       <img class="is-base" src="{{ include.cover | relative_url }}" alt="{{ include.title }} cover" width="160">
@@ -17,7 +22,25 @@ Inputs (passed via include params):
       {%- endif -%}
     </div>
   </td>
-  <td style="padding:8px;width:80%;vertical-align:middle">
+  <td class="project-cell" style="padding:8px 70px 24px 8px;width:80%;vertical-align:middle">
+    {%- if include.tags -%}
+      <div class="project-tags" aria-label="Project tags">
+      {%- assign tag_list = include.tags | split: ',' -%}
+      {%- for tag in tag_list -%}
+        {%- assign t = tag | strip -%}
+        <span class="project-tag project-tag--{{ t }}">
+          {%- case t -%}
+            {%- when 'computer-vision' -%}CV
+            {%- when 'machine-learning' -%}ML
+            {%- when 'buildings-energy' -%}B&amp;E
+            {%- when 'software-development' -%}Dev
+            {%- when 'architecture-design' -%}A&amp;D
+            {%- else -%}{{ t }}
+          {%- endcase -%}
+        </span>
+      {%- endfor -%}
+      </div>
+    {%- endif -%}
     <span class="papertitle">{{ include.title }}</span>
     <br>
     {{ include.byline_html }}
@@ -33,5 +56,6 @@ Inputs (passed via include params):
       {%- endfor -%}
     {%- endif -%}
     <p>{{ include.description }}</p>
+    {%- if include.year -%}<span class="project-year">{{ include.year }}</span>{%- endif -%}
   </td>
 </tr>

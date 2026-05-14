@@ -229,18 +229,271 @@ span.highlight {
   transition: opacity 0.2s ease-in-out;
 }
 
+/* When a hover image (typically an animated GIF) is provided, it plays by
+   default and fades out on hover to reveal the static base cover. */
 .project-thumb img.is-hover {
   position: absolute;
   inset: 0;
-  opacity: 0;
-}
-
-.project-thumb:hover img.is-hover {
   opacity: 1;
 }
 
-.project-thumb:hover img.is-base {
+.project-thumb:hover img.is-hover {
   opacity: 0;
+}
+
+/* ---------- Project tags (color-coded chips, top-right of each row) ---------- */
+
+:root {
+  --tag-cv-fg:  #0e7490;
+  --tag-cv-bg:  #cffafe;
+  --tag-ml-fg:  #6d28d9;
+  --tag-ml-bg:  #ede9fe;
+  --tag-be-fg:  #b45309;
+  --tag-be-bg:  #fef3c7;
+  --tag-dev-fg: #047857;
+  --tag-dev-bg: #d1fae5;
+  --tag-ad-fg:  #be185d;
+  --tag-ad-bg:  #fce7f3;
+}
+
+[data-theme="dark"] {
+  --tag-cv-fg:  #67e8f9;
+  --tag-cv-bg:  rgba(14, 116, 144, 0.28);
+  --tag-ml-fg:  #c4b5fd;
+  --tag-ml-bg:  rgba(109, 40, 217, 0.28);
+  --tag-be-fg:  #fcd34d;
+  --tag-be-bg:  rgba(180, 83, 9, 0.28);
+  --tag-dev-fg: #6ee7b7;
+  --tag-dev-bg: rgba(4, 120, 87, 0.28);
+  --tag-ad-fg:  #f9a8d4;
+  --tag-ad-bg:  rgba(190, 24, 93, 0.28);
+}
+
+.project-cell {
+  position: relative;
+}
+
+.project-tags {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 45%;
+  z-index: 1;
+}
+
+.project-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+  background: transparent;
+  border: 1px solid currentColor;
+  transition: background-color var(--duration-fast) var(--ease-out-cubic),
+              color var(--duration-fast) var(--ease-out-cubic),
+              border-color var(--duration-fast) var(--ease-out-cubic);
+}
+
+.project-tag--computer-vision       { color: var(--tag-cv-fg); }
+.project-tag--machine-learning      { color: var(--tag-ml-fg); }
+.project-tag--buildings-energy      { color: var(--tag-be-fg); }
+.project-tag--software-development  { color: var(--tag-dev-fg); }
+.project-tag--architecture-design   { color: var(--tag-ad-fg); }
+
+.project-tag:hover { color: #fff; border-color: transparent; }
+.project-tag--computer-vision:hover       { background: var(--tag-cv-fg); }
+.project-tag--machine-learning:hover      { background: var(--tag-ml-fg); }
+.project-tag--buildings-energy:hover      { background: var(--tag-be-fg); }
+.project-tag--software-development:hover  { background: var(--tag-dev-fg); }
+.project-tag--architecture-design:hover   { background: var(--tag-ad-fg); }
+
+.project-row.is-hidden { display: none; }
+
+/* Year label in the bottom-right corner of each project cell. */
+.project-year {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 12px;
+  color: #888;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3px;
+}
+
+[data-theme="dark"] .project-year { color: #999; }
+
+/* ---------- Project filter chips (above the Projects table) ---------- */
+
+.project-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 4px 0 18px;
+}
+
+.project-filter__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-filter__year {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.project-filter__year-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  min-width: 40px;
+}
+
+.project-filter__year-display {
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 110px;
+  text-align: left;
+}
+
+/* Dual-thumb range slider — two range inputs overlaid. The ::before bar is
+   the full track; ::after fills the selected segment using --range-start
+   and --range-end (set from JS). */
+.project-filter__dual-range {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+  max-width: 320px;
+  height: 28px;
+  --range-start: 0%;
+  --range-end: 100%;
+}
+
+.project-filter__dual-range::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--light-secondary-bg);
+  border-radius: 2px;
+  transform: translateY(-50%);
+}
+
+.project-filter__dual-range::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: 4px;
+  background: var(--primary-blue);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  left: var(--range-start);
+  right: calc(100% - var(--range-end));
+}
+
+[data-theme="dark"] .project-filter__dual-range::before {
+  background: var(--dark-bg);
+}
+
+.project-filter__dual-range input[type="range"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  appearance: none;
+  pointer-events: none;
+  margin: 0;
+}
+
+.project-filter__dual-range input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--primary-blue);
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.project-filter__dual-range input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--primary-blue);
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.project-filter__dual-range input[type="range"]::-webkit-slider-runnable-track {
+  background: transparent;
+}
+
+.project-filter__chip {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--light-secondary-bg);
+  background: var(--light-bg);
+  color: var(--light-text);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out-cubic),
+              border-color var(--duration-fast) var(--ease-out-cubic),
+              color var(--duration-fast) var(--ease-out-cubic);
+}
+
+[data-theme="dark"] .project-filter__chip {
+  background: var(--dark-bg);
+  color: var(--dark-text);
+  border-color: var(--dark-secondary-bg);
+}
+
+.project-filter__chip:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.project-filter__chip.is-active {
+  background: var(--primary-blue);
+  color: #fff;
+  border-color: var(--primary-blue);
+}
+
+/* Color-coded active states — each tag chip lights up in its category color. */
+.project-filter__chip--featured.is-active             { background: #facc15;           border-color: #facc15;           color: #1a1a1a; }
+.project-filter__chip--computer-vision.is-active      { background: var(--tag-cv-fg);  border-color: var(--tag-cv-fg);  color: #fff; }
+.project-filter__chip--machine-learning.is-active     { background: var(--tag-ml-fg);  border-color: var(--tag-ml-fg);  color: #fff; }
+.project-filter__chip--buildings-energy.is-active     { background: var(--tag-be-fg);  border-color: var(--tag-be-fg);  color: #fff; }
+.project-filter__chip--software-development.is-active { background: var(--tag-dev-fg); border-color: var(--tag-dev-fg); color: #fff; }
+.project-filter__chip--architecture-design.is-active  { background: var(--tag-ad-fg);  border-color: var(--tag-ad-fg);  color: #fff; }
+
+.project-filter__chip-count {
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 400;
+  color: #888;
+  font-variant-numeric: tabular-nums;
+}
+
+.project-filter__chip.is-active .project-filter__chip-count {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* Theme toggle button styles */
