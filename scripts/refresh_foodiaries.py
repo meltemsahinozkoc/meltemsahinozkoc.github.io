@@ -1,21 +1,31 @@
 #!/usr/bin/env python3
-"""Fetch all @oncekahvem posts via Instagram Graph API, parse captions, and
-write assets/data/foodiaries.json.
+"""Fetch all @oncekahvem posts via Instagram Graph API, archive each image to
+disk under images/foodiaries/<post_id>/, and write a JSON index pointing at
+the *local* copies (PESOS — Publish Elsewhere, Syndicate to Own Site).
 
 Reads from environment (or .env via --env-file):
   IG_USER_ID         Instagram Business Account id
   IG_ACCESS_TOKEN    long-lived user token
 
 Writes:
-  assets/data/foodiaries.json
+  assets/data/foodiaries.json     index used by the gallery JS
+  images/foodiaries/<id>/<i>.jpg  one file per image, served by Jekyll
+
+The download step is idempotent: files already on disk are not re-fetched.
+Posts that existed in a previous run but are no longer returned by the
+Graph API (e.g. deleted from Instagram) are preserved in the JSON as long
+as their archived media is still on disk.
 """
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import json
 import os
 import re
+import shutil
 import sys
+import time
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -136,6 +146,126 @@ def extract_pin_city(caption: str) -> str | None:
 
 # Manual overrides loaded from this file (post id -> { city, tags, ... }).
 OVERRIDES_PATH = Path("assets/data/foodiaries-overrides.json")
+
+# Where archived images live on disk + the URL they're served at.
+# Jekyll baseurl is empty (see _config.yml), so root-relative paths work.
+MEDIA_DIR = Path("images/foodiaries")
+MEDIA_URL_PREFIX = "/images/foodiaries"
+
+
+def local_media_path(post_id: str, idx: int) -> Path:
+    return MEDIA_DIR / post_id / f"{idx}.jpg"
+
+
+def local_media_url(post_id: str, idx: int) -> str:
+    return f"{MEDIA_URL_PREFIX}/{post_id}/{idx}.jpg"
+
+
+def download_one(url: str, dest: Path, retries: int = 3) -> bool:
+    """Download `url` to `dest`. Idempotent — returns True immediately if
+    `dest` already exists with non-zero size. Returns False on failure
+    after retries; partial files are removed."""
+    if dest.exists() and dest.stat().st_size > 0:
+        return True
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    last_err: Exception | None = None
+    for attempt in range(retries):
+        try:
+            req = urllib.request.Request(
+                url,
+                headers={"User-Agent": "Mozilla/5.0 foodiaries-archiver"},
+            )
+            with urllib.request.urlopen(req, timeout=60) as r, open(dest, "wb") as f:
+                shutil.copyfileobj(r, f)
+            if dest.stat().st_size == 0:
+                raise RuntimeError("empty body")
+            return True
+        except Exception as e:  # noqa: BLE001 — log all and retry
+            last_err = e
+            if dest.exists():
+                dest.unlink()
+            if attempt < retries - 1:
+                time.sleep(1 + attempt * 2)
+    print(f"  warn: download failed {dest} <- {url[:90]}…: {last_err}", file=sys.stderr)
+    return False
+
+
+def archive_media(records: list[dict[str, Any]], workers: int = 8) -> tuple[int, int]:
+    """Download every CDN URL referenced in `records` and rewrite each
+    record's `media_urls` (and `thumbnail_url`) to point at the local
+    file. Records are mutated in place. Returns (downloaded, failed) —
+    downloaded counts both newly-fetched and already-on-disk files."""
+    jobs: list[tuple[dict[str, Any], int, str]] = []
+    for rec in records:
+        urls = rec.get("media_urls") or []
+        for i, url in enumerate(urls):
+            if isinstance(url, str) and url.startswith(MEDIA_URL_PREFIX):
+                continue  # already local
+            jobs.append((rec, i, url))
+    if not jobs:
+        return 0, 0
+
+    print(f"  archiving {len(jobs)} media files (workers={workers})…", file=sys.stderr)
+
+    def task(job: tuple[dict[str, Any], int, str]) -> tuple[dict[str, Any], int, bool]:
+        rec, i, url = job
+        ok = download_one(url, local_media_path(rec["id"], i))
+        return rec, i, ok
+
+    ok_count = 0
+    fail_count = 0
+    done = 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
+        for rec, i, ok in pool.map(task, jobs):
+            done += 1
+            if ok:
+                ok_count += 1
+                rec["media_urls"][i] = local_media_url(rec["id"], i)
+            else:
+                fail_count += 1
+            if done % 100 == 0:
+                print(f"    {done}/{len(jobs)} processed", file=sys.stderr)
+
+    # Refresh the convenience thumbnail field to match.
+    for rec in records:
+        urls = rec.get("media_urls") or []
+        rec["thumbnail_url"] = urls[0] if urls else None
+
+    return ok_count, fail_count
+
+
+def merge_with_existing(new_records: list[dict[str, Any]], existing_path: Path) -> list[dict[str, Any]]:
+    """Preserve previously archived posts that aren't in the new API
+    response (e.g. deleted from Instagram). We only keep an old record
+    if its media_urls all resolve to files still on disk — otherwise the
+    archive is incomplete and the entry would render broken thumbnails."""
+    if not existing_path.exists():
+        return new_records
+    try:
+        old_records = json.loads(existing_path.read_text())
+    except (json.JSONDecodeError, OSError):
+        return new_records
+    new_ids = {r["id"] for r in new_records}
+    kept: list[dict[str, Any]] = []
+    for rec in old_records:
+        if rec.get("id") in new_ids:
+            continue
+        urls = rec.get("media_urls") or []
+        if not urls:
+            continue
+        if all(
+            isinstance(u, str)
+            and u.startswith(MEDIA_URL_PREFIX)
+            and (Path(".") / u.lstrip("/")).exists()
+            for u in urls
+        ):
+            kept.append(rec)
+    if kept:
+        print(
+            f"  preserved {len(kept)} archived posts no longer in the IG API response",
+            file=sys.stderr,
+        )
+    return new_records + kept
 
 
 def load_dotenv(path: Path) -> None:
@@ -368,6 +498,14 @@ def main(argv: Iterable[str] | None = None) -> int:
     parser.add_argument(
         "--out", default=Path("assets/data/foodiaries.json"), type=Path
     )
+    parser.add_argument(
+        "--no-archive",
+        action="store_true",
+        help="Skip downloading media; write CDN URLs (which expire) into the JSON.",
+    )
+    parser.add_argument(
+        "--workers", type=int, default=8, help="Concurrent download workers"
+    )
     args = parser.parse_args(list(argv) if argv is not None else None)
 
     load_dotenv(args.env_file)
@@ -386,6 +524,12 @@ def main(argv: Iterable[str] | None = None) -> int:
     print(f"  loaded {len(overrides)} overrides", file=sys.stderr)
 
     records = [transform(p, overrides) for p in raw_posts]
+
+    if not args.no_archive:
+        ok, fail = archive_media(records, workers=args.workers)
+        print(f"  archived {ok} files locally, {fail} failures", file=sys.stderr)
+        records = merge_with_existing(records, args.out)
+
     records.sort(key=lambda r: r["timestamp"], reverse=True)
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
