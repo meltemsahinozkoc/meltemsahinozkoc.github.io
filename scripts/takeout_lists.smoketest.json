@@ -1,0 +1,13 @@
+{
+  "_comment": "Smoke test: Pittsburgh Coffee + one multi-city list (Bavaria) to verify per-place city resolution.",
+  "cities": {
+    "pittsburgh": { "name": "Pittsburgh", "country": "USA",     "center": { "lat": 40.4406, "lng": -79.9959 }, "zoom": 13 },
+    "munich":     { "name": "Munich",     "country": "Germany", "center": { "lat": 48.1351, "lng": 11.5820  }, "zoom": 12 },
+    "nuremberg":  { "name": "Nuremberg",  "country": "Germany", "center": { "lat": 49.4521, "lng": 11.0767  }, "zoom": 13 },
+    "erlangen":   { "name": "Erlangen",   "country": "Germany", "center": { "lat": 49.5897, "lng": 11.0078  }, "zoom": 13 }
+  },
+  "lists": [
+    { "file": "🇺🇸 PITTSBURGH - COFFEE.csv",       "label": "Pittsburgh Coffee", "region_hint": "Pittsburgh, PA, USA", "type": "coffee" },
+    { "file": "🇩🇪 MUNCHEN-NURNBERG-ERLANGEN.csv", "label": "Bavaria",           "region_hint": "Bavaria, Germany",     "type": "food" }
+  ]
+}

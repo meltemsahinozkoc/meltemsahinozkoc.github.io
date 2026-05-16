@@ -1,0 +1,48 @@
+{
+  "_comment": "Map each CSV under <takeout>/Saved to a fixed city + category. `category` is one of 'food', 'coffee', 'food_coffee' (mixed; processor infers per-place type). `top: true` flags a list as 'top picks' (e.g. Istanbul TOP).",
+  "cities": {
+    "pittsburgh": {
+      "name": "Pittsburgh",
+      "country": "USA",
+      "center": { "lat": 40.4406, "lng": -79.9959 },
+      "zoom": 13
+    },
+    "istanbul": {
+      "name": "Istanbul",
+      "country": "Türkiye",
+      "center": { "lat": 41.0082, "lng": 28.9784 },
+      "zoom": 12
+    }
+  },
+  "lists": [
+    {
+      "file": "Pittsburgh Coffee.csv",
+      "city": "pittsburgh",
+      "category": "coffee",
+      "label": "Coffee",
+      "region_hint": "Pittsburgh, PA, USA"
+    },
+    {
+      "file": "Pittsburgh Food.csv",
+      "city": "pittsburgh",
+      "category": "food",
+      "label": "Food",
+      "region_hint": "Pittsburgh, PA, USA"
+    },
+    {
+      "file": "Istanbul - Food & Coffee.csv",
+      "city": "istanbul",
+      "category": "food_coffee",
+      "label": "Food & Coffee",
+      "region_hint": "Istanbul, Türkiye"
+    },
+    {
+      "file": "Istanbul - Top picks.csv",
+      "city": "istanbul",
+      "category": "food_coffee",
+      "label": "Top picks",
+      "region_hint": "Istanbul, Türkiye",
+      "top": true
+    }
+  ]
+}

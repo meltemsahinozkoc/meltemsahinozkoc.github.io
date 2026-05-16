@@ -14,7 +14,7 @@
     {% include clarity.html %}
   </head>
 
-  <body class="{% if page.permalink contains '/foodiaries/' or page.permalink contains '/places/' %}page-wide{% endif %}{% if page.permalink contains '/places/' %} page-places{% endif %}{% if page.permalink contains '/music/' %} page-music{% endif %}">
+  <body class="{% if page.permalink contains '/foodiaries/' or page.permalink contains '/places/' or page.permalink contains '/food-coffee-map/' %}page-wide{% endif %}{% if page.permalink contains '/places/' %} page-places{% endif %}{% if page.permalink contains '/music/' %} page-music{% endif %}{% if page.permalink contains '/food-coffee-map/' %} page-food-coffee-map{% endif %}">
     {% include site-header.html %}
 
     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light theme">
